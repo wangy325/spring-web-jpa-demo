@@ -39,7 +39,7 @@ public class SpitterController {
         if (errors.hasErrors()){
             return "registerForm";
         }
-        Spitter save = spitterRepository.save(spitter);
+        Spitter save = spitterRepository.register(spitter);
         return "redirect:/spitter/" + spitter.getUsername();
     }
 

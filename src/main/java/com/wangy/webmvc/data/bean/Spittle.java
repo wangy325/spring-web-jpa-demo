@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Date;
 
@@ -15,10 +16,8 @@ import java.util.Date;
  */
 @Getter
 @EqualsAndHashCode(exclude = {"id", "time"})
-@Entity
 public class Spittle {
-    @Id
-    @GeneratedValue
+
     private Long id;
     private String message;
     private Date time;

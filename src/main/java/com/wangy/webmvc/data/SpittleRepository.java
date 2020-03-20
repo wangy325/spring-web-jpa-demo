@@ -10,7 +10,7 @@ import java.util.List;
  * @version 1.0
  * @date 2020/3/14 / 20:30
  */
-public interface SpittleRepository extends CrudRepository<Spittle,Long> {
+public interface SpittleRepository {
 
     List<Spittle> getSpittles(long max , int count);
 

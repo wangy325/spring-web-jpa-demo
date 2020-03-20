@@ -1,4 +1,3 @@
-DROP TABLE IF EXISTS `spitter`;
 CREATE TABLE spitter(
     `id` INT NOT NULL AUTO_INCREMENT,
     `firstName` VARCHAR(30) NOT NULL,
@@ -8,7 +7,6 @@ CREATE TABLE spitter(
     PRIMARY KEY(`id`)
 );
 
-DROP TABLE IF EXISTS `spittle`;
 CREATE TABLE spittle(
     `id` BIGINT NOT NULL AUTO_INCREMENT,
     `message` VARCHAR(255) NOT NULL,
