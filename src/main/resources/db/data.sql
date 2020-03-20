@@ -1,0 +1,1 @@
+INSERT INTO spitter VALUES (1,'stephen', 'curry', 'sc30', 'gstate');
