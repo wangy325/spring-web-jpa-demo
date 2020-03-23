@@ -1,15 +1,15 @@
 package com.wangy.webmvc.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
 
 /**
+ * 使用Spring JDBC提供的{@link JdbcTemplate}来减少Java JDBC的样板式代码（连接获取，异常处理，资源释放...）
+ *
  * @author wangy
  * @version 1.0
  * @date 2020/3/20 / 14:57
@@ -17,11 +17,14 @@ import javax.sql.DataSource;
 @Configuration
 public class JdbcConfig {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
+
+    public JdbcConfig(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(){
+    public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource);
     }
 }
