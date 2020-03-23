@@ -30,8 +30,8 @@ public class SpitterRepositoryImpl implements SpitterRepository {
 
     @Override
     public Spitter register(Spitter spitter) {
-        // TODO h2无法主键自增
-        String sql = "INSERT INTO SPITTER VALUES(?,?,?,?)";
+        //获取自增主键
+        String sql = "INSERT INTO spitter (firstname, lastname, username, password) VALUES(?,?,?,?)";
         KeyHolder keyHolder = new GeneratedKeyHolder();
         int update = jdbcOperations.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -49,7 +49,7 @@ public class SpitterRepositoryImpl implements SpitterRepository {
     @Override
     public Spitter findByUsername(String username) {
 
-        String sql = "SELECT * FROM SPITTER WHERE USERNAME = ?";
+        String sql = "SELECT * FROM spitter WHERE USERNAME = ?";
         // java 8 方法引用
         return jdbcOperations.queryForObject(sql, this::mapRow, username);
     }
