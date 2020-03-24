@@ -1,5 +1,6 @@
 package com.wangy.webmvc.data.impl;
 
+import com.wangy.webmvc.config.JdbcConfig;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,12 @@ import java.sql.Statement;
 @Slf4j
 public class SpitterRepositoryImpl implements SpitterRepository {
 
+    /**
+     * JdbcOperations是{@link org.springframework.jdbc.core.JdbcTemplate}的超类（接口）<br>
+     * 此处注入JdbcOperation是可行的，也保证了此类和{@link JdbcConfig}的松耦合
+     *
+     * @see JdbcOperations
+     */
     private final JdbcOperations jdbcOperations;
 
     public SpitterRepositoryImpl(JdbcOperations jdbcOperations) {
@@ -50,18 +57,18 @@ public class SpitterRepositoryImpl implements SpitterRepository {
     public Spitter findByUsername(String username) {
 
         String sql = "SELECT * FROM spitter WHERE USERNAME = ?";
+        //此处可使用内部类或lambda表达式
         // java 8 方法引用
         return jdbcOperations.queryForObject(sql, this::mapRow, username);
     }
 
     private Spitter mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Spitter spitter = new Spitter(rs.getInt("id")
+        return new Spitter(rs.getInt("id")
             , rs.getString("firstName")
             , rs.getString("lastName")
             , rs.getString("username")
             , rs.getString("password")
         );
-        return spitter;
     }
 
 }
