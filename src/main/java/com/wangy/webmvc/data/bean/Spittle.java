@@ -2,6 +2,7 @@ package com.wangy.webmvc.data.bean;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +16,12 @@ import java.util.Date;
  * @date 2020/3/14 / 20:33
  */
 @Getter
+@Setter
 @EqualsAndHashCode(exclude = {"id", "time"})
 public class Spittle {
 
     private Long id;
+    private Spitter spitter;
     private String message;
     private Date time;
     private Double latitude;
@@ -28,23 +31,25 @@ public class Spittle {
     }
 
     public Spittle(String message, Date time) {
-        this(message, time, null, null);
+        this(null, message, time, null, null);
     }
 
     public Spittle(Long id, String message, Date time) {
-        this(id, message, time, null, null);
+        this(id, null,  message, time, null, null);
     }
 
-    public Spittle(String message, Date time, Double latitude, Double longitude) {
+    public Spittle(Spitter spitter, String message, Date time, Double latitude, Double longitude) {
         this.id = null;
+        this.spitter = spitter;
         this.message = message;
         this.time = time;
         this.latitude = latitude;
         this.longitude = longitude;
     }
 
-    public Spittle(Long id, String message, Date time, Double latitude, Double longitude) {
+    public Spittle(Long id, Spitter spitter, String message, Date time, Double latitude, Double longitude) {
         this.id = id;
+        this.spitter = spitter;
         this.message = message;
         this.time = time;
         this.latitude = latitude;

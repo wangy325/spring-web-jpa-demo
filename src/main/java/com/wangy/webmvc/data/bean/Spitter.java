@@ -21,7 +21,7 @@ import javax.validation.constraints.Size;
 @ToString
 public class Spitter {
 
-    private int id;
+    private Integer id;
     @NotNull
     @Size(min = 3, max = 20)
     private String firstName;

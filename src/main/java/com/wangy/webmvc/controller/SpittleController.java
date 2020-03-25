@@ -70,7 +70,7 @@ public class SpittleController {
      */
     @RequestMapping(value = "/{spittleId}", method = RequestMethod.GET)
     public String getOneSpittle(@PathVariable long spittleId, Model model) {
-        model.addAttribute(spittleRepository.findOne(spittleId));
+        model.addAttribute(spittleRepository.findById(spittleId));
         return "spittle";
     }
 }
