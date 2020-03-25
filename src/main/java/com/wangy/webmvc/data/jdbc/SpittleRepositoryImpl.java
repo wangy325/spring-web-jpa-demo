@@ -28,11 +28,11 @@ public class SpittleRepositoryImpl implements SpittleRepository {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    private final String SPITTLE_SELECT = "SELECT t1.*, t2.firstName, t2.lastName, t2.username FROM spittle t1  LEFT JOIN  spitter  t2 ON t1.spitterId = t2.id ";
-    private final String SPITTLE_SELECT_BY_ID = SPITTLE_SELECT + "AND t1.id = ?";
-    private final String SPITTLE_SELECT_BY_SPITTER_ID = SPITTLE_SELECT + "AND t2.id = ? ORDER BY t1.time DESC";
+    private final String SPITTLE_SELECT = "SELECT t1.*, t2.firstName, t2.lastName, t2.username, t2.password FROM spittle t1  LEFT JOIN  spitter  t2 ON t1.spitterId = t2.id ";
+    private final String SPITTLE_SELECT_BY_ID = SPITTLE_SELECT + "WHERE t1.id = ?";
+    private final String SPITTLE_SELECT_BY_SPITTER_ID = SPITTLE_SELECT + "WHERE t2.id = ? ORDER BY t1.time DESC";
     private final String SPITTLE_SELECT_RECENT_SPITTLES = SPITTLE_SELECT + "ORDER BY t1.time DESC LIMIT ?";
-    private final String SPITTLE_SELECT_AFTER = SPITTLE_SELECT + "AND t1.id < ? ORDER BY t1.time DESC LIMIT ?";
+    private final String SPITTLE_SELECT_AFTER = SPITTLE_SELECT + "WHERE t1.id < ? ORDER BY t1.time DESC LIMIT ?";
     private final String SPITTLE_DEL = "DELETE FROM spittle WHERE id = ?";
 
     private Spittle mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -47,8 +47,8 @@ public class SpittleRepositoryImpl implements SpittleRepository {
         String lastName = rs.getString("lastName");
         String username = rs.getString("username");
         String password = rs.getString("password");
-        Spitter spitter = new Spitter(spitterid,firstName,lastName,username,password);
-        return new Spittle(id,spitter, message,time,latitude,longitude);
+        Spitter spitter = new Spitter(spitterid, firstName, lastName, username, password);
+        return new Spittle(id, spitter, message, time, latitude, longitude);
     }
 
 
@@ -94,17 +94,17 @@ public class SpittleRepositoryImpl implements SpittleRepository {
     private long insertAndReturnKey(Spittle spittle) {
         SimpleJdbcInsert sji = new SimpleJdbcInsert(jdbcTemplate).withTableName("spittle");
         sji.setGeneratedKeyName("id");
-        Map<String, Object> params = new HashMap<>(5,1f);
+        Map<String, Object> params = new HashMap<>(5, 1f);
         params.put("spitterId", spittle.getSpitter().getId());
         params.put("message", spittle.getMessage());
-        params.put("time",spittle.getTime());
-        params.put("latitude",spittle.getLatitude());
-        params.put("longitude",spittle.getLongitude());
+        params.put("time", spittle.getTime());
+        params.put("latitude", spittle.getLatitude());
+        params.put("longitude", spittle.getLongitude());
         return sji.executeAndReturnKey(params).longValue();
     }
 
     @Override
     public void delete(long id) {
-        jdbcTemplate.update(SPITTLE_DEL);
+        jdbcTemplate.update(SPITTLE_DEL, id);
     }
 }
