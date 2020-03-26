@@ -3,10 +3,11 @@ package com.wangy.webmvc.data;
 import com.wangy.webmvc.data.bean.Spittle;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -20,24 +21,24 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  */
 @SpringBootTest
 @ActiveProfiles("dev0")
+@Transactional("hibernateTransactionManager")
 public class SpittleRepositoryTest {
+
     @Autowired
+    @Qualifier("hibernateSpittleRepo")
     private SpittleRepository spittleRepository;
 
     @Test
-    @Transactional
     public void testCount() {
         assertEquals(10, spittleRepository.count());
     }
 
     @Test
-    @Transactional
     public void testFindById() {
         assertEquals(1, spittleRepository.findById(1).getId());
     }
 
     @Test
-    @Transactional
     public void testFindBySpitterId() {
         List<Spittle> sl = spittleRepository.findBySpitterId(4);
         assertEquals(4, sl.size());
@@ -46,7 +47,6 @@ public class SpittleRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void testSave() {
         Spittle byId = spittleRepository.findById(10);
         Spittle spittle = new Spittle(byId.getSpitter(), "仁慈的父我已坠入", new Date(), 0d, 0d);
@@ -56,7 +56,6 @@ public class SpittleRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void testFindRecent() {
         List<Spittle> recent = spittleRepository.findRecent();
         assertEquals(10, recent.size());
@@ -78,7 +77,6 @@ public class SpittleRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void testDelete(){
         spittleRepository.delete(6);
         assertEquals(9, spittleRepository.count());

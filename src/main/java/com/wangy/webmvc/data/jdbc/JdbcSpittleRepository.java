@@ -3,6 +3,7 @@ package com.wangy.webmvc.data.jdbc;
 import com.wangy.webmvc.data.SpittleRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import com.wangy.webmvc.data.bean.Spittle;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -20,11 +21,12 @@ import java.util.Map;
  * @date 2020/3/14 / 21:27
  */
 @Repository
-public class SpittleRepositoryImpl implements SpittleRepository {
+@Qualifier("jdbcSpittleRepo")
+public class JdbcSpittleRepository implements SpittleRepository {
 
     private JdbcTemplate jdbcTemplate;
 
-    public SpittleRepositoryImpl(JdbcTemplate jdbcTemplate) {
+    public JdbcSpittleRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

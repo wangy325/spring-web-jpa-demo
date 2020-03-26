@@ -4,6 +4,7 @@ import com.wangy.webmvc.data.bean.Spitter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,14 +23,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @SpringBootTest
 @ActiveProfiles("dev0")
+@Transactional("hibernateTransactionManager")
 public class SpitterRepositoryTest {
 
+    @Qualifier("hibernateSpitterRepo")
     @Autowired
     private SpitterRepository spitterRepository;
 
 
     @Test
-    @Transactional
     public void findAll() {
         List<Spitter> spitters = spitterRepository.findAll();
         assertEquals(4, spitters.size());
@@ -40,7 +42,6 @@ public class SpitterRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void findByUsername() {
         assertSpitter(0, spitterRepository.findByUsername("skr"));
         assertSpitter(1, spitterRepository.findByUsername("ji"));
@@ -49,7 +50,6 @@ public class SpitterRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void findOne() {
         assertSpitter(0, spitterRepository.findOne(1));
         assertSpitter(1, spitterRepository.findOne(2));
@@ -58,7 +58,6 @@ public class SpitterRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void save_newSpitter() {
         assertEquals(4, spitterRepository.count());
         Spitter spitter = new Spitter(null, "jack", "chan", "jc", "pass");
@@ -69,7 +68,6 @@ public class SpitterRepositoryTest {
     }
 
     @Test
-    @Transactional
     public void save_existingSpitter() {
         assertEquals(4, spitterRepository.count());
         Spitter spitter = new Spitter(4, "tanya", "cai", "rh", "pass");

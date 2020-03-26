@@ -3,6 +3,7 @@ package com.wangy.webmvc.controller;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,10 +23,11 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @Controller
 @RequestMapping("/spitter")
 public class SpitterController {
+
     private SpitterRepository spitterRepository;
 
     @Autowired
-    public SpitterController(SpitterRepository spitterRepository) {
+    public SpitterController(@Qualifier("jdbcSpitterRepo") SpitterRepository spitterRepository) {
         this.spitterRepository = spitterRepository;
     }
 

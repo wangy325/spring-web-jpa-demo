@@ -4,6 +4,7 @@ import com.wangy.webmvc.config.JdbcConfig;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -26,8 +27,8 @@ import java.util.Objects;
  * @date 2020/3/16 / 14:22
  */
 @Repository
-@Slf4j
-public class SpitterRepositoryImpl implements SpitterRepository {
+@Qualifier("jdbcSpitterRepo")
+public class JdbcSpitterRepository implements SpitterRepository {
 
     /**
      * JdbcOperations是{@link JdbcTemplate}的超类（接口）<br>
@@ -38,7 +39,7 @@ public class SpitterRepositoryImpl implements SpitterRepository {
      */
     private final JdbcOperations jdbcOperations;
 
-    public SpitterRepositoryImpl(JdbcOperations jdbcOperations) {
+    public JdbcSpitterRepository(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
     }
 

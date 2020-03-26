@@ -2,7 +2,11 @@ package com.wangy.webmvc.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
@@ -15,6 +19,7 @@ import javax.sql.DataSource;
  * @date 2020/3/20 / 14:57
  */
 @Configuration
+@EnableTransactionManagement
 public class JdbcConfig {
 
     private final DataSource dataSource;
@@ -26,5 +31,10 @@ public class JdbcConfig {
     @Bean
     public JdbcTemplate jdbcTemplate() {
         return new JdbcTemplate(dataSource);
+    }
+
+    @Bean
+    public PlatformTransactionManager jdbcTransactionManager(){
+        return new DataSourceTransactionManager(dataSource);
     }
 }

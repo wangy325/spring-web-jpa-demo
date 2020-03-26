@@ -2,6 +2,8 @@ package com.wangy.webmvc.controller;
 
 import com.wangy.webmvc.data.SpittleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Map;
 
 /**
  * @author wangy
@@ -23,19 +28,19 @@ public class SpittleController {
     private SpittleRepository spittleRepository;
 
     @Autowired
-    public SpittleController(SpittleRepository spittleRepository) {
+    public SpittleController(@Qualifier("jdbcSpittleRepo") SpittleRepository spittleRepository) {
         this.spittleRepository = spittleRepository;
     }
 
     /**
-     * 添加模型数据到view中，model可以使用键值为String类型的{@link java.util.Map}代替，效果是一样的。
+     * 添加模型数据到view中，model可以使用键值为String类型的{@link Map}代替，效果是一样的。
      * 本例中model没有指定键值，会根据值的类型推断，因为值是List&lt;Spittle&gt;,所以键值会推断为spittleList，
-     * 键值的生成机制见{@link org.springframework.core.Conventions#getVariableName}
+     * 键值的生成机制见{@link Conventions#getVariableName}
      *
      * @param model
      * @return 视图名
      * @see Model
-     * @see org.springframework.web.servlet.ModelAndView
+     * @see ModelAndView
      * @see ModelMap
      */
     @RequestMapping(method = RequestMethod.GET)

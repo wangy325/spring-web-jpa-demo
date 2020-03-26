@@ -4,23 +4,28 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
+ * 注意{@link ManyToOne}和{@link JoinColumn}注解
+ *
  * @author wangy
  * @version 1.0
  * @date 2020/3/14 / 20:33
+ * @see Spitter
  */
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"id", "time"})
+@Entity
 public class Spittle {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "spitterId")
     private Spitter spitter;
     private String message;
     private Date time;
@@ -28,6 +33,7 @@ public class Spittle {
     private Double longitude;
 
     public Spittle() {
+        // this constructor is for hibernate
     }
 
     public Spittle(String message, Date time) {
@@ -35,7 +41,7 @@ public class Spittle {
     }
 
     public Spittle(Long id, String message, Date time) {
-        this(id, null,  message, time, null, null);
+        this(id, null, message, time, null, null);
     }
 
     public Spittle(Spitter spitter, String message, Date time, Double latitude, Double longitude) {
