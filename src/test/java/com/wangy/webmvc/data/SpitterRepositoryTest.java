@@ -32,6 +32,11 @@ public class SpitterRepositoryTest {
 
 
     @Test
+    public void testCount(){
+        assertEquals(4, spitterRepository.count());
+    }
+
+    @Test
     public void findAll() {
         List<Spitter> spitters = spitterRepository.findAll();
         assertEquals(4, spitters.size());

@@ -25,7 +25,8 @@ The following guides illustrate how to use some features concretely:
 - 基于java bean配置的spring web项目
 - jsp （java server page）
 - 使用MockMvc测试控制器
-- `javax.validation`进行表单输入的简单校验
+- `javax.validation`进行bean字段简单校验
 - 使用H2内存数据库和Spring JDBC Template实现持久化
-- Spring Boot 2.x自动配置Hakari数据库连接池
-- 配置多数据源并激活所需配置(多种激活方式)
+- Spring Boot自动配置Hakari数据库连接池（多数据源时需手动配置）
+- 配置多数据源并激活所需配置(多种激活方式，引入mysql数据库)
+- 使用hibernate实现持久化（基于注解和java配置类）
