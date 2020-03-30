@@ -13,9 +13,10 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.ResourceBundle;
 
 /**
+ * 基于spring-orm的hibernate sessionFactory 配置和事务配置
+ *
  * @author wangy
  * @version 1.0
  * @date 2020/3/17 / 19:41
@@ -23,7 +24,6 @@ import java.util.ResourceBundle;
  */
 @Configuration
 @EnableTransactionManagement
-//@ComponentScan
 public class HibernateConfig {
 
     private final DataSource dataSource;

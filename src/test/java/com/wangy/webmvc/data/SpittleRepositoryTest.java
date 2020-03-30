@@ -29,6 +29,13 @@ public class SpittleRepositoryTest {
     private SpittleRepository spittleRepository;
 
     @Test
+    public void testGetSpittles(){
+        List<Spittle> spittles = spittleRepository.getSpittles(2, 1);
+        assertEquals(1, spittles.size());
+        assertEquals("da wan kuan mian", spittles.get(0).getMessage());
+    }
+
+    @Test
     public void testCount() {
         assertEquals(10, spittleRepository.count());
     }

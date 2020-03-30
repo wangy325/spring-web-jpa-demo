@@ -4,13 +4,9 @@ import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
 
@@ -33,18 +29,6 @@ public class HibernateSpitterRepository implements SpitterRepository {
         return sessionFactory.getCurrentSession();
     }
 
-    /*private CriteriaBuilder criteriaBuilder(){
-        return currentSession().getCriteriaBuilder();
-    }
-
-    private CriteriaQuery<Spitter> criteriaQuery(){
-        return criteriaBuilder().createQuery(Spitter.class);
-    }
-
-    private Root<Spitter> spitterRoot(){
-        return criteriaQuery().from(Spitter.class);
-    }*/
-
     @Override
     public Spitter save(Spitter spitter) {
         Serializable id = currentSession().save(spitter);
@@ -58,6 +42,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
             .createQuery("INSERT INTO Spitter (firstName,lastName,username,password)" +
                 " SELECT (firstName, lastName,username,password) FROM Spitter ");*/
 
+        // TODO 无法获取主键
         /*int i = currentSession().createNativeQuery("INSERT INTO spitter (firstName, lastName, username, password) " +
             "values (:1st, :2nd, :3rd, :4th)")
             .setParameter("1st", spitter.getFirstName())
@@ -85,7 +70,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
         return query.getSingleResult();*/
 
 /* **************************************************************************/
-        // 或者使用hibernate支持的原生SQL进行带参查询
+        // 或者使用hibernate所支持的原生SQL进行带参查询
         // addEntity()搭配createNativeQuery(String sqlString)
         // createNativeQuery(String  sqlString, Class <R> resultClass)可单独使用
         // 原因查看api
@@ -131,6 +116,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
 
     @Override
     public Spitter findOne(int id) {
+        // use session.get()
 //        return currentSession().get(Spitter.class, id);
 
         // use HQL

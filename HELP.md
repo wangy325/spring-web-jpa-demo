@@ -30,3 +30,4 @@ The following guides illustrate how to use some features concretely:
 - Spring Boot自动配置Hakari数据库连接池（多数据源时需手动配置）
 - 配置多数据源并激活所需配置(多种激活方式，引入mysql数据库)
 - 使用hibernate实现持久化（基于注解和java配置类）
+- hibernate query的几种方式
