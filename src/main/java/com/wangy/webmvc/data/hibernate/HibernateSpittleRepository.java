@@ -21,6 +21,7 @@ import java.util.List;
  */
 @Repository
 @Qualifier("hibernateSpittleRepo")
+@SuppressWarnings("all")
 public class HibernateSpittleRepository implements SpittleRepository {
 
     private SessionFactory sessionFactory;
@@ -61,7 +62,6 @@ public class HibernateSpittleRepository implements SpittleRepository {
     }
 
     @Override
-    @SuppressWarnings("all")
     public List<Spittle> findBySpitterId(int spitterId) {
         /************** 以下3种criteriaQuery方法记录了其简化过程 ************/
         CriteriaBuilder cb = currentSession().getCriteriaBuilder();
