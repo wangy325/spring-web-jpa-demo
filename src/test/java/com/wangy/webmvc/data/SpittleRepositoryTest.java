@@ -21,11 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  */
 @SpringBootTest
 @ActiveProfiles("dev0")
-@Transactional("hibernateTransactionManager")
+@Transactional("jpaTransactionManager")
 public class SpittleRepositoryTest {
 
     @Autowired
-    @Qualifier("hibernateSpittleRepo")
+    @Qualifier("jpaSpittleRepository")
     private SpittleRepository spittleRepository;
 
     @Test
@@ -49,6 +49,7 @@ public class SpittleRepositoryTest {
     public void testFindBySpitterId() {
         List<Spittle> sl = spittleRepository.findBySpitterId(4);
         assertEquals(4, sl.size());
+        assertEquals("jay",sl.get(0).getSpitter().getFirstName());
         assertEquals(8, sl.get(0).getId());
         assertEquals(7, sl.get(1).getId());
     }

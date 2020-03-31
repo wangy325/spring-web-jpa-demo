@@ -23,10 +23,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 @SpringBootTest
 @ActiveProfiles("dev0")
-@Transactional("hibernateTransactionManager")
+@Transactional("jpaTransactionManager")
 public class SpitterRepositoryTest {
 
-    @Qualifier("hibernateSpitterRepo")
+    @Qualifier("jpaSpitterRepository")
     @Autowired
     private SpitterRepository spitterRepository;
 

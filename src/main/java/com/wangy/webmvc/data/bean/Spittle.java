@@ -25,7 +25,7 @@ public class Spittle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /** TODO 搞清楚这两个注解(@ManyToOne,@JoinColumn)的意思 */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spitterId")
     private Spitter spitter;
     private String message;

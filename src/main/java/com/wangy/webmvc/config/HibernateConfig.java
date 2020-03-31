@@ -22,8 +22,8 @@ import java.util.Properties;
  * @date 2020/3/17 / 19:41
  * @see LocalSessionFactoryBean
  */
-@Configuration
-@EnableTransactionManagement
+//@Configuration
+//@EnableTransactionManagement
 public class HibernateConfig {
 
     private final DataSource dataSource;
@@ -32,7 +32,7 @@ public class HibernateConfig {
         this.dataSource = dataSource;
     }
 
-    @Bean
+//    @Bean
     public SessionFactory sessionFactory() {
         // 使用Spring-orm创建Hibernate SessionFactory
         LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
@@ -57,7 +57,7 @@ public class HibernateConfig {
         return lsfb.getObject();
     }
 
-    @Bean
+//    @Bean
     public PlatformTransactionManager hibernateTransactionManager() {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
         transactionManager.setSessionFactory(sessionFactory());
