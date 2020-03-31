@@ -8,12 +8,23 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * 注意{@link ManyToOne}和{@link JoinColumn}注解
+ * TODO: 注意{@link ManyToOne}和{@link JoinColumn}注解
+ *
+ * <pre>
+ *
+ *   &#064;ManyToOne(fetch = FetchType.LAZY)
+ *
+ *   意味着Session/entityManager不自动级连获取持久化字段信息，此属性默认值为<code>EAGER</code>,详情
+ *   见<a href="Retrieval by Eager Fetch"> https://www.objectdb.com/java/jpa/persistence/
+ *   retrieve#Retrieval_by_Eager_Fetch </a>
+ *
+ * </pre>
  *
  * @author wangy
  * @version 1.0
  * @date 2020/3/14 / 20:33
  * @see Spitter
+ * @see
  */
 @Getter
 @Setter
@@ -24,8 +35,7 @@ public class Spittle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /** TODO 搞清楚这两个注解(@ManyToOne,@JoinColumn)的意思 */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spitterId")
     private Spitter spitter;
     private String message;

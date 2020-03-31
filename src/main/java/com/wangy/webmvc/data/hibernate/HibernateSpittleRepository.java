@@ -48,7 +48,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
         CriteriaQuery<Spittle> cq = cb.createQuery(Spittle.class);
         Root<Spittle> root = cq.from(Spittle.class);
         cq.select(root)
-            .where(cb.lessThan(root.get("id"),max))
+            .where(cb.lessThan(root.get("id"), max))
             .orderBy(cb.desc(root.get("time")));
         Query<Spittle> query = currentSession().createQuery(cq);
         List<Spittle> resultList = query.setMaxResults(count).getResultList();
@@ -99,8 +99,12 @@ public class HibernateSpittleRepository implements SpittleRepository {
 
 
         // 3. use criteriaQuery where
-        // 既然可以只用select，那么方法3显然时更简洁的
-        // TODO: 为什么hibernate会查2次去获取Spittle.spitter的信息,并且自动拼装对象
+        /** 既然可以只用select，那么方法3显然时更简洁的
+         // 为什么hibernate会查2次去获取Spittle.spitter的信息,并且自动拼装对象
+         // 那是因为@ManyToOne注解的FetchType=EAGER，会自动查询数据库填充持久化字段的信息
+         // 这是为什么此方法会执行2次sql查询的原因
+         // 也是方法1和方法2可以简化的原因
+         // 下面的sq查询方法同理*/
         /*CriteriaQuery<Spittle> cq = cb.createQuery(Spittle.class);
         Root<Spittle> spittleRoot = cq.from(Spittle.class);
         cq.select(spittleRoot)

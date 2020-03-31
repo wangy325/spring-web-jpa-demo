@@ -31,3 +31,6 @@ The following guides illustrate how to use some features concretely:
 - 配置多数据源并激活所需配置(多种激活方式，引入mysql数据库)
 - 使用hibernate实现持久化（基于注解和java配置类）
 - hibernate query的几种方式
+- jpa配置的代码在git:jpa分支下
+- hibernate的`SessionFactory`继承了JPA的`EntityManagerFactory`类，因此在一个项目里同时激活这两个配置会出现冲突
+- `javax.persitence.*`下的几个注解`@Entity`，`@Id`，`@GeneratedValue`，`@ManytoOne`，`@JoinColumn`，`@OneToMany`，`@MappedBy`...
