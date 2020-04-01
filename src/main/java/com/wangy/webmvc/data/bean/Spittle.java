@@ -14,9 +14,10 @@ import java.util.Date;
  *
  *   &#064;ManyToOne(fetch = FetchType.LAZY)
  *
- *   意味着Session/entityManager不自动级连获取持久化字段信息，此属性默认值为<code>EAGER</code>,详情
- *   见<a href="Retrieval by Eager Fetch"> https://www.objectdb.com/java/jpa/persistence/
- *   retrieve#Retrieval_by_Eager_Fetch </a>
+ *   意味着Session/entityManager不自动级连获取持久化字段信息，此情况下，会获取一个含有拦截器的{@link Spitter}
+ *   对象，当程序想获取{@link Spitter}的详细信息时，Session/entityManager会再从数据库中获取，此属性默认值为
+ *   <code>EAGER</code>，详情见<a href="Retrieval by Eager Fetch"> https://www.objectdb.com/java/
+ *   jpa/persistence/retrieve#Retrieval_by_Eager_Fetch </a>
  *
  * </pre>
  *

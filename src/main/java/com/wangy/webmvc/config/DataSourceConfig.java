@@ -63,6 +63,9 @@ public class DataSourceConfig {
         hikariConfig.setDriverClassName(h2Driver);
         hikariConfig.setUsername(username);
         hikariConfig.setPassword(password);
+        hikariConfig.setMaximumPoolSize(10);
+        hikariConfig.setConnectionTimeout(3000);
+        hikariConfig.setMinimumIdle(2);
         return new HikariDataSource(hikariConfig);
     }
 
