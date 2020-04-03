@@ -1,9 +1,7 @@
 package com.wangy.webmvc.config;
 
-import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -11,7 +9,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import static org.springframework.orm.jpa.vendor.Database.H2;
@@ -52,10 +49,10 @@ public class JpaConfig {
      * @return {@link javax.persistence.EntityManager}
      */
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
         emfb.setDataSource(dataSource);
-        emfb.setJpaVendorAdapter(jpaVendorAdapter());
+        emfb.setJpaVendorAdapter(jpaVendorAdapter);
         // mapper scan
         emfb.setPackagesToScan("com.wangy.webmvc.data.bean");
         return emfb;
