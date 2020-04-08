@@ -1,6 +1,7 @@
 package com.wangy.webmvc.data.hibernate;
 
 import com.wangy.webmvc.data.SpittleRepository;
+import com.wangy.webmvc.data.bean.Spitter;
 import com.wangy.webmvc.data.bean.Spittle;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -86,7 +87,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
 
         // 2. use criteriaQuery from and join
         // 上一个方法中获取spittle时，发现spittle对象已经拼装好了，于是便没有必要multiSelect了
-        /*CriteriaQuery<Spittle> spittleQuery = cb.createQuery(Spittle.class);
+        CriteriaQuery<Spittle> spittleQuery = cb.createQuery(Spittle.class);
         Root<Spittle> spittleRoot = spittleQuery.from(Spittle.class);
         Root<Spitter> spitterRoot = spittleQuery.from(Spitter.class);
         spittleQuery
@@ -95,7 +96,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
                 , cb.equal(spitterRoot.get("id"), spitterId))
             .orderBy(cb.desc(spittleRoot.get("time")));
         Query<Spittle> query = currentSession().createQuery(spittleQuery);
-        List<Spittle> resultList = query.getResultList();*/
+        List<Spittle> resultList = query.getResultList();
 
 
         // 3. use criteriaQuery where
@@ -104,7 +105,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
          // 那是因为@ManyToOne注解的FetchType=EAGER，会自动查询数据库填充持久化字段的信息
          // 这是为什么此方法会执行2次sql查询的原因
          // 也是方法1和方法2可以简化的原因
-         // 下面的sq查询方法同理*/
+         // 下面的sql查询方法同理*/
         /*CriteriaQuery<Spittle> cq = cb.createQuery(Spittle.class);
         Root<Spittle> spittleRoot = cq.from(Spittle.class);
         cq.select(spittleRoot)
@@ -122,10 +123,10 @@ public class HibernateSpittleRepository implements SpittleRepository {
 
         // use native SQL
         // 你还真行啊
-        List<Spittle> resultList = currentSession()
+        /*List<Spittle> resultList = currentSession()
             .createNativeQuery("SELECT t1.* FROM spittle t1 , spitter t2 WHERE t1.spitterId = t2.id AND t2.id = :spitterId ORDER BY t1.time DESC", Spittle.class)
             .setParameter("spitterId", spitterId)
-            .getResultList();
+            .getResultList();*/
 
         return resultList;
     }

@@ -8,10 +8,13 @@ import lombok.ToString;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
- * 使用javax.persistence包下的{@link Entity}注解指定java bean和database table之间的映射<br>
- * {@link Entity},{@link Id}, {@link Column}, {@link GeneratedValue} 注解的效果等同于<em>spitter.hbm.xml</em>文件，
+ * 使用javax.persistence包下的&#064;{@link Entity}注解指定java bean和database table之间的映射<br>
+ * &#064;{@link Entity},&#064;{@link Id}, &#064;{@link Column}, &#064;{@link GeneratedValue}
+ * 注解的效果等同于<em>spitter.hbm.xml</em>文件。
  * 此配置文件（如果存在）用来定义<b>hibernate</b>的元数据（mapper映射关系）：
  *
  * <pre class="code">
@@ -33,7 +36,7 @@ import javax.validation.constraints.Size;
  * &lt;/hibernate-mapping&gt;
  * </pre>
  * <p>
- * {@link NotNull}和{@link Size}注解位于<code>javax.validation.constraints</code>包下，用于简单的参数校验
+ * &#064;{@link NotNull}和&#064;{@link Size}注解位于<code>javax.validation.constraints</code>包下，用于简单的参数校验
  *
  * @author wangy
  * @version 1.0
@@ -52,11 +55,11 @@ public class Spitter {
     private Integer id;
     @NotNull
     @Size(min = 2, max = 20)
-    @Column(name = "firstname")
+    @Column(name = "firstName")
     private String firstName;
     @NotNull
     @Size(min = 2, max = 20)
-    @Column(name = "lastname")
+    @Column(name = "lastName")
     private String lastName;
     @NotNull
     @Size(min = 2, max = 16)
@@ -66,6 +69,11 @@ public class Spitter {
     @Size(min = 4, max = 30)
     @Column(name = "password")
     private String password;
+
+    /**使用&#064;{@link OneToMany}处理一对多映射关系*/
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "spitter")
+    private Collection<Spittle> spittles = new ArrayList<>();
+
 
     public Spitter() {
         // this constructor is for hibernate

@@ -16,8 +16,8 @@ import java.util.Date;
  *
  *   意味着Session/entityManager不自动级连获取持久化字段信息，此情况下，会获取一个含有拦截器的{@link Spitter}
  *   对象，当程序想获取{@link Spitter}的详细信息时，Session/entityManager会再从数据库中获取，此属性默认值为
- *   <code>EAGER</code>，详情见<a href="Retrieval by Eager Fetch"> https://www.objectdb.com/java/
- *   jpa/persistence/retrieve#Retrieval_by_Eager_Fetch </a>
+ *   <code>EAGER</code>，参照<a href="Retrieval by Eager Fetch">
+ *       https://www.objectdb.com/java/jpa/persistence/retrieve#Retrieval_by_Eager_Fetch </a>
  *
  * </pre>
  *
@@ -25,7 +25,6 @@ import java.util.Date;
  * @version 1.0
  * @date 2020/3/14 / 20:33
  * @see Spitter
- * @see
  */
 @Getter
 @Setter
