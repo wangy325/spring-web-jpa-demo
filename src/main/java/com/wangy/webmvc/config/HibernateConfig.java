@@ -26,7 +26,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 public class HibernateConfig {
 
-    private final DataSource dataSource;
+    private DataSource dataSource;
 
     public HibernateConfig(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -58,9 +58,10 @@ public class HibernateConfig {
     }
 
     @Bean
-    public PlatformTransactionManager hibernateTransactionManager() {
+    public PlatformTransactionManager hibernateTransactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(sessionFactory());
+        transactionManager.setSessionFactory(sessionFactory);
+        transactionManager.setDataSource(dataSource);
         return transactionManager;
     }
 

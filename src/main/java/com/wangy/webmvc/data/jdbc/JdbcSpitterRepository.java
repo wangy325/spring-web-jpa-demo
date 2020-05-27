@@ -3,10 +3,10 @@ package com.wangy.webmvc.data.jdbc;
 import com.wangy.webmvc.config.JdbcConfig;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -111,7 +111,7 @@ public class JdbcSpitterRepository implements SpitterRepository {
     public Spitter findByUsername(String username) {
         //此处可使用内部类或lambda表达式
         // java 8 方法引用
-        return jdbcOperations.queryForObject(SPITTER_SELECT + "WHERE username = ?", this::mapRow, username);
+        return jdbcOperations.queryForObject(SPITTER_SELECT + "WHERE username = ?", this::mapResult, username);
     }
 
     @Override
@@ -122,15 +122,15 @@ public class JdbcSpitterRepository implements SpitterRepository {
 
     @Override
     public Spitter findOne(int id) {
-        return jdbcOperations.queryForObject(SPITTER_SELECT + "WHERE id=?", this::mapRow, id);
+        return jdbcOperations.queryForObject(SPITTER_SELECT + "WHERE id=?", (rs, rowNum) -> mapResult(rs, rowNum), id);
     }
 
     @Override
     public List<Spitter> findAll() {
-        return jdbcOperations.query(SPITTER_SELECT, this::mapRow);
+        return jdbcOperations.query(SPITTER_SELECT, (rs, rowNum) -> this.mapResult(rs, rowNum));
     }
 
-    private Spitter mapRow(ResultSet rs, int rowNum) throws SQLException {
+    private Spitter mapResult(ResultSet rs, int rowNum) throws SQLException {
         return new Spitter(rs.getInt("id")
             , rs.getString("firstName")
             , rs.getString("lastName")

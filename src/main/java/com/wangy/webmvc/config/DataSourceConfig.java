@@ -69,10 +69,9 @@ public class DataSourceConfig {
         return new HikariDataSource(hikariConfig);
     }
 
-
     @Bean
     @Profile("qa")
-    public DataSource dataSource() {
+    public DataSource hikariDataSource() {
         // 简单的hikari数据库连接池配置
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(mysqlUrl);
