@@ -31,12 +31,17 @@ public class HibernateSpitterRepository implements SpitterRepository {
 
     @Override
     public Spitter save(Spitter spitter) {
-        Serializable id = currentSession().save(spitter);
+        Serializable id = spitter.getId();
+        if (id == null) {
+             id = currentSession().save(spitter);
+        } else{
+            currentSession().update(spitter);
+        }
         return new Spitter((int) id,
-            spitter.getUsername(),
-            spitter.getPassword(),
             spitter.getFirstName(),
-            spitter.getLastName());
+            spitter.getLastName(),
+            spitter.getUsername(),
+            spitter.getPassword());
 
         /*currentSession()
             .createQuery("INSERT INTO Spitter (firstName,lastName,username,password)" +
