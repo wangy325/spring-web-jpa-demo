@@ -37,10 +37,10 @@ public class HibernateConfig {
     @Bean
     public SessionFactory hibernateSessionFactory() {
         // 使用Spring-orm创建Hibernate SessionFactory
-        LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
-        lsfb.setDataSource(dataSource);
+        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
+        localSessionFactoryBean.setDataSource(dataSource);
         // 必须使用注解配置Hibernate元数据
-        lsfb.setPackagesToScan("com.wangy.webmvc.data.bean");
+        localSessionFactoryBean.setPackagesToScan("com.wangy.webmvc.data.bean");
         try {
             // many ways to load a property file
             ClassPathResource resource = new ClassPathResource("hibernate/hibernate.properties");
@@ -51,12 +51,12 @@ public class HibernateConfig {
             inputStream = ClassLoader.getSystemResourceAsStream("hibernate/hibernate.properties");
             Properties properties = new Properties();
             properties.load(inputStream);
-            lsfb.setHibernateProperties(properties);
-            lsfb.afterPropertiesSet();
+            localSessionFactoryBean.setHibernateProperties(properties);
+            localSessionFactoryBean.afterPropertiesSet();
         } catch (IOException e) {
             return null;
         }
-        return lsfb.getObject();
+        return localSessionFactoryBean.getObject();
     }
 
     @Bean

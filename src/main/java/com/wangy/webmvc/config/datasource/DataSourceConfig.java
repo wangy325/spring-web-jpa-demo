@@ -40,8 +40,8 @@ public class DataSourceConfig {
 
 
     @Bean
-    @Profile("embed")
-    public DataSource embeddedDataSource_0() {
+    @Profile("h2")
+    public DataSource springEmbedH2() {
         //以下配置使用Spring jdbc配置嵌入式数据库
         //使用h2数据库默认配置(testdb,sa,empty)并运行指定脚本
         //(springboot)脚本可自动配置，无需指定
@@ -54,8 +54,8 @@ public class DataSourceConfig {
 
 
     @Bean
-    @Profile("embed-hikari")
-    public DataSource embeddedDataSource_1() {
+    @Profile("h2-hikari")
+    public DataSource hikariEmbedH2() {
         // 以下配置使用hikari连接池接入h2内存数据库
         // TODO 脚本自动配置运行 ？
         HikariConfig hikariConfig = new HikariConfig();
@@ -71,7 +71,7 @@ public class DataSourceConfig {
 
     @Bean
     @Profile("mysql-hikari")
-    public DataSource hikariDataSource() {
+    public DataSource hikariMysql() {
         // 简单的hikari数据库连接池配置
         HikariConfig hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(mysqlUrl);

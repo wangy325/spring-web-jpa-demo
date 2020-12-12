@@ -1,11 +1,15 @@
 package com.wangy.webmvc.data;
 
-import com.wangy.webmvc.WebmvcApplicationTests;
+import com.wangy.webmvc.RepositoryTestConfig;
+import com.wangy.webmvc.config.RootConfig;
+
 import com.wangy.webmvc.data.bean.Spittle;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
@@ -18,10 +22,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 1.0
  * @date 2020/3/26 / 00:19
  */
-@SpringBootTest
-@ActiveProfiles("embed")
-@Transactional
-public class SpittleRepositoryTest extends WebmvcApplicationTests {
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = RootConfig.class)
+@ActiveProfiles("h2")
+@Transactional(rollbackFor = Exception.class)
+public class SpittleRepositoryTest extends RepositoryTestConfig {
 
     @Autowired
     private SpittleRepository spittleRepository;
@@ -30,7 +35,7 @@ public class SpittleRepositoryTest extends WebmvcApplicationTests {
     public void testGetSpittles() {
         List<Spittle> spittles = spittleRepository.getSpittles(2, 1);
         assertEquals(1, spittles.size());
-        assertEquals("da wan kuan mian", spittles.get(0).getMessage());
+        assertEquals("we aint going home", spittles.get(0).getMessage());
     }
 
     @Test
@@ -54,7 +59,7 @@ public class SpittleRepositoryTest extends WebmvcApplicationTests {
     @Test
     public void testSave() {
         Spittle byId = spittleRepository.findById(10);
-        Spittle spittle = new Spittle(byId.getSpitter(), "仁慈的父我已坠入", new Date(), 0d, 0d);
+        Spittle spittle = new Spittle(byId.getSpitter(), "real dunk champ", new Date(), 0d, 0d);
         Spittle save = spittleRepository.save(spittle);
         assertEquals(11, spittleRepository.count());
         assertEquals(11, save.getId());
@@ -87,3 +92,4 @@ public class SpittleRepositoryTest extends WebmvcApplicationTests {
         assertEquals(9, spittleRepository.count());
     }
 }
+

@@ -42,7 +42,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
     public List<Spittle> getSpittles(long max, int count) {
         // use HQL
         /*List<Spittle> resultList = currentSession()
-            .createQuery("SELECT s FROM Spittle s WHERE s.id < :max ORDER BY s.time DESC ", Spittle.class)
+            .createQuery("SELECT s FROM spittle s WHERE s.id < :max ORDER BY s.time DESC ", Spittle.class)
             .setMaxResults(count)
             .setParameter("max", max)
             .getResultList();*/
@@ -120,7 +120,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
 
         // usr HQL 等效于方法2
         /*List<Spittle> resultList = currentSession()
-            .createQuery("SELECT t1 FROM Spittle t1 , Spitter t2 WHERE t1.spitter.id = t2.id AND t2.id = :spitterId ORDER BY t1.time DESC", Spittle.class)
+            .createQuery("SELECT t1 FROM spittle t1 , spitter t2 WHERE t1.spitter.id = t2.id AND t2.id = :spitterId ORDER BY t1.time DESC", Spittle.class)
             .setParameter("spitterId", spitterId)
             .getResultList();*/
 
@@ -137,7 +137,7 @@ public class HibernateSpittleRepository implements SpittleRepository {
     @Override
     public long count() {
         return currentSession()
-            .createQuery("SELECT COUNT(s) FROM Spittle s ", Long.class)
+            .createQuery("SELECT COUNT(s) FROM spittle s ", Long.class)
             .getSingleResult();
     }
 
@@ -149,18 +149,18 @@ public class HibernateSpittleRepository implements SpittleRepository {
     @Override
     public List<Spittle> findRecent(int count) {
         // use HQL
-        /*List<Spittle> resultList = currentSession()
-            .createQuery("SELECT s FROM Spittle s ORDER BY s.time DESC ", Spittle.class)
+        List<Spittle> resultList = currentSession()
+            .createQuery("SELECT s FROM spittle s ORDER BY s.time DESC ", Spittle.class)
             .setMaxResults(count)
-            .getResultList();*/
+            .getResultList();
 
         // use Criteria Query
-        CriteriaBuilder cb = currentSession().getCriteriaBuilder();
+        /*CriteriaBuilder cb = currentSession().getCriteriaBuilder();
         CriteriaQuery<Spittle> cq = cb.createQuery(Spittle.class);
         Root<Spittle> root = cq.from(Spittle.class);
         cq.select(root).orderBy(cb.desc(root.get("time")));
         Query<Spittle> query = currentSession().createQuery(cq);
-        List<Spittle> resultList = query.setMaxResults(count).getResultList();
+        List<Spittle> resultList = query.setMaxResults(count).getResultList();*/
 
         return resultList;
     }

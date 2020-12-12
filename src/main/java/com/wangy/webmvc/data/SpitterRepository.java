@@ -1,11 +1,8 @@
 package com.wangy.webmvc.data;
 
 import com.wangy.webmvc.data.bean.Spitter;
-import org.springframework.data.repository.CrudRepository;
 
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author wangy

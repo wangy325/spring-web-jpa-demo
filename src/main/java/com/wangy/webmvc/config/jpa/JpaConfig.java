@@ -1,5 +1,6 @@
 package com.wangy.webmvc.config.jpa;
 
+import com.wangy.webmvc.config.condition.JpaDatabaseType;
 import com.wangy.webmvc.config.condition.PersistenceType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 
 import static org.springframework.orm.jpa.vendor.Database.H2;
+import static org.springframework.orm.jpa.vendor.Database.MYSQL;
 
 /**
  * @author wangy
@@ -21,6 +23,7 @@ import static org.springframework.orm.jpa.vendor.Database.H2;
  */
 @Configuration
 @EnableTransactionManagement
+@PersistenceType("jpa")
 public class JpaConfig {
 
     private final DataSource dataSource;
@@ -35,14 +38,25 @@ public class JpaConfig {
      * @return JpaVendorAdapter
      */
     @Bean
-    @PersistenceType("jpa")
-    public JpaVendorAdapter jpaVendorAdapter() {
-        HibernateJpaVendorAdapter hjva = new HibernateJpaVendorAdapter();
-        hjva.setDatabase(H2);
-        hjva.setShowSql(true);
-        hjva.setGenerateDdl(false);
-//        hjva.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
-        return hjva;
+    @JpaDatabaseType
+    public JpaVendorAdapter jpaVendorAdapterH2() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        hibernateJpaVendorAdapter.setDatabase(H2);
+        hibernateJpaVendorAdapter.setShowSql(true);
+        hibernateJpaVendorAdapter.setGenerateDdl(false);
+        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
+        return hibernateJpaVendorAdapter;
+    }
+
+    @Bean
+    @JpaDatabaseType("mysql")
+    public JpaVendorAdapter jpaVendorAdapterMysql() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        hibernateJpaVendorAdapter.setDatabase(MYSQL);
+        hibernateJpaVendorAdapter.setShowSql(true);
+        hibernateJpaVendorAdapter.setGenerateDdl(false);
+        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+        return hibernateJpaVendorAdapter;
     }
 
     /**
@@ -51,18 +65,16 @@ public class JpaConfig {
      * @return {@link javax.persistence.EntityManager}
      */
     @Bean
-    @PersistenceType("jpa")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter) {
-        LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
-        emfb.setDataSource(dataSource);
-        emfb.setJpaVendorAdapter(jpaVendorAdapter);
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         // mapper scan
-        emfb.setPackagesToScan("com.wangy.webmvc.data.bean");
-        return emfb;
+        entityManagerFactoryBean.setPackagesToScan("com.wangy.webmvc.data.bean");
+        return entityManagerFactoryBean;
     }
 
     @Bean
-    @PersistenceType("jpa")
     public PlatformTransactionManager jpaTransactionManager() {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setDataSource(dataSource);

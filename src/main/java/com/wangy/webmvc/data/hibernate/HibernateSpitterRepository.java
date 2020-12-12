@@ -5,9 +5,13 @@ import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.util.List;
 
@@ -102,12 +106,12 @@ public class HibernateSpitterRepository implements SpitterRepository {
 //        return findAll().size();
 
         // use criteriaQuery
-        /*CriteriaBuilder cb = currentSession().getCriteriaBuilder();
+        CriteriaBuilder cb = currentSession().getCriteriaBuilder();
         CriteriaQuery<Long> criteriaQuery = cb.createQuery(Long.class);
         Root<Spitter> spitterRoot = criteriaQuery.from(Spitter.class);
         criteriaQuery.select(cb.count(spitterRoot));
         Query<Long> query = currentSession().createQuery(criteriaQuery);
-        return query.getSingleResult().intValue();*/
+        return query.getSingleResult().intValue();
 
         // use HQL
         /*return currentSession()
@@ -115,10 +119,10 @@ public class HibernateSpitterRepository implements SpitterRepository {
             .getSingleResult().intValue();*/
 
         // use native SQL
-        Number result = (Number) currentSession()
+        /*Number result = (Number) currentSession()
             .createNativeQuery("SELECT COUNT(*) FROM spitter")
             .getSingleResult();
-        return result.intValue();
+        return result.intValue();*/
     }
 
     @Override
@@ -128,7 +132,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
 
         // use HQL
         return currentSession()
-            .createQuery("SELECT s FROM Spitter s WHERE s.id = :id", Spitter.class)
+            .createQuery("SELECT s FROM spitter s WHERE s.id = :id", Spitter.class)
             .setParameter("id",id)
             .getSingleResult();
     }
@@ -145,7 +149,7 @@ public class HibernateSpitterRepository implements SpitterRepository {
 
        // usr HQL
         /*return currentSession()
-            .createQuery("SELECT s FROM Spitter s", Spitter.class)
+            .createQuery("SELECT s FROM spitter s", Spitter.class)
             .getResultList();*/
 
         // use native SQL

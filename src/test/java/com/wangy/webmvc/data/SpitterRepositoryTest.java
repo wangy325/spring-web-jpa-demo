@@ -1,12 +1,15 @@
 package com.wangy.webmvc.data;
 
-import com.wangy.webmvc.WebmvcApplicationTests;
+import com.wangy.webmvc.RepositoryTestConfig;
+import com.wangy.webmvc.config.RootConfig;
 import com.wangy.webmvc.data.bean.Spitter;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -21,10 +24,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @version 1.0
  * @date 2020/3/17 / 16:07
  */
-@SpringBootTest
-@ActiveProfiles("embed")
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = RootConfig.class)
+@ActiveProfiles("h2")
 @Transactional
-public class SpitterRepositoryTest extends WebmvcApplicationTests {
+public class SpitterRepositoryTest extends RepositoryTestConfig {
 
     @Autowired
     private SpitterRepository spitterRepository;
@@ -46,10 +50,10 @@ public class SpitterRepositoryTest extends WebmvcApplicationTests {
 
     @Test
     public void findByUsername() {
-        assertSpitter(0, spitterRepository.findByUsername("skr"));
-        assertSpitter(1, spitterRepository.findByUsername("ji"));
-        assertSpitter(2, spitterRepository.findByUsername("daynight"));
-        assertSpitter(3, spitterRepository.findByUsername("juhx"));
+        assertSpitter(0, spitterRepository.findByUsername("sc30"));
+        assertSpitter(1, spitterRepository.findByUsername("kt11"));
+        assertSpitter(2, spitterRepository.findByUsername("kd35"));
+        assertSpitter(3, spitterRepository.findByUsername("ai9"));
     }
 
     @Test
@@ -63,7 +67,7 @@ public class SpitterRepositoryTest extends WebmvcApplicationTests {
     @Test
     public void save_newSpitter() {
         assertEquals(4, spitterRepository.count());
-        Spitter spitter = new Spitter(null, "jack", "chan", "jc", "pass");
+        Spitter spitter = new Spitter(null, "draymond", "green", "dg23", "pass");
         Spitter saved = spitterRepository.save(spitter);
         assertEquals(5, spitterRepository.count());
         assertSpitter(4, saved);
@@ -73,7 +77,7 @@ public class SpitterRepositoryTest extends WebmvcApplicationTests {
     @Test
     public void save_existingSpitter() {
         assertEquals(4, spitterRepository.count());
-        Spitter spitter = new Spitter(4, "tanya", "cai", "rh", "pass");
+        Spitter spitter = new Spitter(4, "andrew", "wiggins", "aw22", "pass");
         Spitter saved = spitterRepository.save(spitter);
         assertSpitter(5, saved);
         assertEquals(4, spitterRepository.count());
@@ -92,13 +96,13 @@ public class SpitterRepositoryTest extends WebmvcApplicationTests {
 
     private static Spitter[] SPITTERS = new Spitter[6];
 
-    @BeforeAll
-    static void before() {
-        SPITTERS[0] = new Spitter(1, "cris", "wu", "skr", "pass");
-        SPITTERS[1] = new Spitter(2, "cai", "xk", "ji", "pass");
-        SPITTERS[2] = new Spitter(3, "jj", "lin", "daynight", "pass");
-        SPITTERS[3] = new Spitter(4, "jay", "chou", "juhx", "pass");
-        SPITTERS[4] = new Spitter(5, "jack", "chan", "jc", "pass");
-        SPITTERS[5] = new Spitter(4, "tanya", "cai", "rh", "pass");
+    @Before
+    public void before() {
+        SPITTERS[0] = new Spitter(1, "stephen", "curry", "sc30", "pass");
+        SPITTERS[1] = new Spitter(2, "klay", "thompson", "kt11", "pass");
+        SPITTERS[2] = new Spitter(3, "kevin", "durant", "kd35", "pass");
+        SPITTERS[3] = new Spitter(4, "andre", "iguodala", "ai9", "pass");
+        SPITTERS[4] = new Spitter(5, "draymond", "green", "dg23", "pass");
+        SPITTERS[5] = new Spitter(4, "andrew", "wiggins", "aw22", "pass");
     }
 }

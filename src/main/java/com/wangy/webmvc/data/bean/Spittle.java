@@ -29,7 +29,7 @@ import java.util.Date;
 @Getter
 @Setter
 @EqualsAndHashCode(exclude = {"id", "time"})
-@Entity
+@Entity(name = "spittle")
 public class Spittle {
 
     @Id

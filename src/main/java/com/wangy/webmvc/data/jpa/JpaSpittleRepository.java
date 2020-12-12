@@ -42,7 +42,7 @@ public class JpaSpittleRepository implements SpittleRepository {
         // use JPQL
         // 其实和HQL一样
         List<Spittle> resultList = em
-            .createQuery("SELECT s FROM Spittle s WHERE s.id < :max ORDER BY s.time DESC", Spittle.class)
+            .createQuery("SELECT s FROM spittle s WHERE s.id < :max ORDER BY s.time DESC", Spittle.class)
             .setMaxResults(count)
             .setParameter("max", max)
             .getResultList();
@@ -71,7 +71,7 @@ public class JpaSpittleRepository implements SpittleRepository {
     @Override
     public List<Spittle> findBySpitterId(int spitterId) {
         return em
-            .createQuery("SELECT s FROM Spittle s, Spitter ss WHERE s.spitter.id = ss.id AND ss.id = :id ORDER BY s.time DESC", Spittle.class)
+            .createQuery("SELECT s FROM spittle s, spitter ss WHERE s.spitter.id = ss.id AND ss.id = :id ORDER BY s.time DESC", Spittle.class)
             .setParameter("id", spitterId)
             .getResultList();
     }
@@ -79,7 +79,7 @@ public class JpaSpittleRepository implements SpittleRepository {
     @Override
     public long count() {
         return em
-            .createQuery("SELECT COUNT(s) FROM Spittle s", Long.class)
+            .createQuery("SELECT COUNT(s) FROM spittle s", Long.class)
             .getSingleResult();
     }
 
@@ -91,7 +91,7 @@ public class JpaSpittleRepository implements SpittleRepository {
     @Override
     public List<Spittle> findRecent(int count) {
         return em
-            .createQuery("SELECT s FROM Spittle s ORDER BY s.time DESC ", Spittle.class)
+            .createQuery("SELECT s FROM spittle s ORDER BY s.time DESC ", Spittle.class)
             .setMaxResults(count)
             .getResultList();
     }

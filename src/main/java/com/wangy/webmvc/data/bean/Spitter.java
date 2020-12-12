@@ -47,7 +47,7 @@ import java.util.Collection;
 @Getter
 @EqualsAndHashCode
 @ToString
-@Entity
+@Entity(name = "spitter")
 public class Spitter {
 
     @Id

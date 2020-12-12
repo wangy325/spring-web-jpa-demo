@@ -44,7 +44,7 @@ public class JpaSpitterRepository implements SpitterRepository {
         } else {
             // update
             int i = em
-                .createQuery("UPDATE Spitter s SET s.firstName = :_1, s.lastName = :_2, s.username = :_3, s.password = :_4")
+                .createQuery("UPDATE spitter s SET s.firstName = :_1, s.lastName = :_2, s.username = :_3, s.password = :_4")
                 .setParameter("_1", spitter.getFirstName())
                 .setParameter("_2", spitter.getLastName())
                 .setParameter("_3", spitter.getUsername())
@@ -67,7 +67,7 @@ public class JpaSpitterRepository implements SpitterRepository {
     @Override
     public int count() {
         return em
-            .createQuery("SELECT COUNT(s) FROM Spitter s", Long.class)
+            .createQuery("SELECT COUNT(s) FROM spitter s", Long.class)
             .getSingleResult()
             .intValue();
     }
@@ -79,6 +79,6 @@ public class JpaSpitterRepository implements SpitterRepository {
 
     @Override
     public List<Spitter> findAll() {
-        return em.createQuery("SELECT s FROM Spitter s ", Spitter.class).getResultList();
+        return em.createQuery("SELECT s FROM spitter s ", Spitter.class).getResultList();
     }
 }

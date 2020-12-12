@@ -1,6 +1,6 @@
 package com.wangy.webmvc;
 
-public abstract class WebmvcApplicationTests {
+public abstract class RepositoryTestConfig {
 
     // this construction block set program argument "persistenceType",
     // which values in [jdbc, hibernate, jpa], to decide which persistence repository to use.
