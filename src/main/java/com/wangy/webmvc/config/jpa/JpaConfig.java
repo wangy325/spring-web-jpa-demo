@@ -1,5 +1,6 @@
-package com.wangy.webmvc.config;
+package com.wangy.webmvc.config.jpa;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -34,6 +35,7 @@ public class JpaConfig {
      * @return JpaVendorAdapter
      */
     @Bean
+    @PersistenceType("jpa")
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter hjva = new HibernateJpaVendorAdapter();
         hjva.setDatabase(H2);
@@ -49,6 +51,7 @@ public class JpaConfig {
      * @return {@link javax.persistence.EntityManager}
      */
     @Bean
+    @PersistenceType("jpa")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean emfb = new LocalContainerEntityManagerFactoryBean();
         emfb.setDataSource(dataSource);
@@ -59,6 +62,7 @@ public class JpaConfig {
     }
 
     @Bean
+    @PersistenceType("jpa")
     public PlatformTransactionManager jpaTransactionManager() {
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager();
         jpaTransactionManager.setDataSource(dataSource);

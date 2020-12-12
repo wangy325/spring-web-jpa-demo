@@ -1,4 +1,4 @@
-package com.wangy.webmvc.config;
+package com.wangy.webmvc.config.web;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

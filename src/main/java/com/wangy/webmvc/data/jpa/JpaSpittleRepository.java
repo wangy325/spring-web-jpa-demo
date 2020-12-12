@@ -1,5 +1,6 @@
 package com.wangy.webmvc.data.jpa;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import com.wangy.webmvc.data.SpittleRepository;
 import com.wangy.webmvc.data.bean.Spittle;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +11,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+
+
 /**
  * @author wangy
  * @version 1.0
@@ -17,8 +20,9 @@ import java.util.List;
  */
 @Repository
 @Qualifier("jpaSpittleRepository")
-@SuppressWarnings("all")
+@PersistenceType("jpa")
 @Slf4j
+@SuppressWarnings("all")
 public class JpaSpittleRepository implements SpittleRepository {
 
     /**

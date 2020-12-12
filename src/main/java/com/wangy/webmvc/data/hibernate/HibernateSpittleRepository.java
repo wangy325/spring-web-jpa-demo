@@ -1,5 +1,6 @@
 package com.wangy.webmvc.data.hibernate;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import com.wangy.webmvc.data.SpittleRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import com.wangy.webmvc.data.bean.Spittle;
@@ -7,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,6 +24,7 @@ import java.util.List;
  */
 @Repository
 @Qualifier("hibernateSpittleRepo")
+@PersistenceType("hibernate")
 @SuppressWarnings("all")
 public class HibernateSpittleRepository implements SpittleRepository {
 

@@ -27,7 +27,7 @@ public class SpitterController {
     private SpitterRepository spitterRepository;
 
     @Autowired
-    public SpitterController(@Qualifier("hibernateSpitterRepo") SpitterRepository spitterRepository) {
+    public SpitterController(SpitterRepository spitterRepository) {
         this.spitterRepository = spitterRepository;
     }
 

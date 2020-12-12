@@ -1,5 +1,6 @@
-package com.wangy.webmvc.config;
+package com.wangy.webmvc.config.hibernate;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
+@PersistenceType("hibernate")
 public class HibernateConfig {
 
     private DataSource dataSource;
@@ -33,7 +35,7 @@ public class HibernateConfig {
     }
 
     @Bean
-    public SessionFactory sessionFactory() {
+    public SessionFactory hibernateSessionFactory() {
         // 使用Spring-orm创建Hibernate SessionFactory
         LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
         lsfb.setDataSource(dataSource);
@@ -46,9 +48,9 @@ public class HibernateConfig {
 
 //            ResourceBundle bundle = ResourceBundle.getBundle("hibernate/hibernate.properties");
 
-            InputStream stream = ClassLoader.getSystemResourceAsStream("hibernate/hibernate.properties");
+            inputStream = ClassLoader.getSystemResourceAsStream("hibernate/hibernate.properties");
             Properties properties = new Properties();
-            properties.load(stream);
+            properties.load(inputStream);
             lsfb.setHibernateProperties(properties);
             lsfb.afterPropertiesSet();
         } catch (IOException e) {

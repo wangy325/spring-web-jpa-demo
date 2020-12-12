@@ -1,5 +1,6 @@
 package com.wangy.webmvc.data.hibernate;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.hibernate.Session;
@@ -17,6 +18,7 @@ import java.util.List;
  */
 @Repository
 @Qualifier("hibernateSpitterRepo")
+@PersistenceType("hibernate")
 public class HibernateSpitterRepository implements SpitterRepository {
 
     private SessionFactory sessionFactory;

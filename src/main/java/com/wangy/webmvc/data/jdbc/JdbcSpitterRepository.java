@@ -1,12 +1,12 @@
 package com.wangy.webmvc.data.jdbc;
 
-import com.wangy.webmvc.config.JdbcConfig;
+import com.wangy.webmvc.config.condition.PersistenceType;
+import com.wangy.webmvc.config.jdbc.JdbcConfig;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -28,6 +28,7 @@ import java.util.Objects;
  */
 @Repository
 @Qualifier("jdbcSpitterRepo")
+@PersistenceType("jdbc")
 public class JdbcSpitterRepository implements SpitterRepository {
 
     /**
@@ -37,9 +38,9 @@ public class JdbcSpitterRepository implements SpitterRepository {
      *
      * @see JdbcOperations
      */
-    private final JdbcOperations jdbcOperations;
+    private final JdbcTemplate jdbcOperations;
 
-    public JdbcSpitterRepository(JdbcOperations jdbcOperations) {
+    public JdbcSpitterRepository(JdbcTemplate jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
     }
 

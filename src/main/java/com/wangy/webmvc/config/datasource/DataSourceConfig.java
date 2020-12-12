@@ -1,4 +1,4 @@
-package com.wangy.webmvc.config;
+package com.wangy.webmvc.config.datasource;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -40,21 +40,21 @@ public class DataSourceConfig {
 
 
     @Bean
-    @Profile("dev0")
+    @Profile("embed")
     public DataSource embeddedDataSource_0() {
         //以下配置使用Spring jdbc配置嵌入式数据库
         //使用h2数据库默认配置(testdb,sa,empty)并运行指定脚本
-        //脚本可自动配置，无需指定
+        //(springboot)脚本可自动配置，无需指定
         return new EmbeddedDatabaseBuilder()
             .setType(EmbeddedDatabaseType.H2)
-            /*.addScript(h2Schema)
-            .addScript(h2Data)*/
+            .addScript(h2Schema)
+            .addScript(h2Data)
             .build();
     }
 
 
     @Bean
-    @Profile("dev1")
+    @Profile("embed-hikari")
     public DataSource embeddedDataSource_1() {
         // 以下配置使用hikari连接池接入h2内存数据库
         // TODO 脚本自动配置运行 ？
@@ -70,7 +70,7 @@ public class DataSourceConfig {
     }
 
     @Bean
-    @Profile("qa")
+    @Profile("mysql-hikari")
     public DataSource hikariDataSource() {
         // 简单的hikari数据库连接池配置
         HikariConfig hikariConfig = new HikariConfig();

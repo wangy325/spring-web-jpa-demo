@@ -1,10 +1,10 @@
 package com.wangy.webmvc.data;
 
+import com.wangy.webmvc.WebmvcApplicationTests;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,14 +22,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @date 2020/3/17 / 16:07
  */
 @SpringBootTest
-@ActiveProfiles("dev0")
-@Transactional("hibernateTransactionManager")
-public class SpitterRepositoryTest {
+@ActiveProfiles("embed")
+@Transactional
+public class SpitterRepositoryTest extends WebmvcApplicationTests {
 
-    @Qualifier("hibernateSpitterRepo")
     @Autowired
     private SpitterRepository spitterRepository;
-
 
     @Test
     public void testCount(){

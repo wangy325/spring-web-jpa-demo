@@ -1,8 +1,8 @@
-package com.wangy.webmvc.config;
+package com.wangy.webmvc.config.jdbc;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -20,6 +20,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableTransactionManagement
+@PersistenceType("jdbc")
 public class JdbcConfig {
 
     private final DataSource dataSource;
@@ -34,7 +35,7 @@ public class JdbcConfig {
     }
 
     @Bean
-    public PlatformTransactionManager jdbcTransactionManager(){
+    public PlatformTransactionManager jdbcTransactionManager() {
         return new DataSourceTransactionManager(dataSource);
     }
 }

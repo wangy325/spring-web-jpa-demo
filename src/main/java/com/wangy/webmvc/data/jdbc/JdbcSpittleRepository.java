@@ -1,5 +1,6 @@
 package com.wangy.webmvc.data.jdbc;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import com.wangy.webmvc.data.SpittleRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import com.wangy.webmvc.data.bean.Spittle;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 @Repository
 @Qualifier("jdbcSpittleRepo")
+@PersistenceType("jdbc")
 public class JdbcSpittleRepository implements SpittleRepository {
 
     private JdbcTemplate jdbcTemplate;

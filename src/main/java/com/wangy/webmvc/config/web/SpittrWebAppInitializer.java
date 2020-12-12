@@ -1,5 +1,6 @@
-package com.wangy.webmvc.config;
+package com.wangy.webmvc.config.web;
 
+import com.wangy.webmvc.config.RootConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**

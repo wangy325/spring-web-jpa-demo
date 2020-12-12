@@ -1,9 +1,9 @@
 package com.wangy.webmvc.data;
 
+import com.wangy.webmvc.WebmvcApplicationTests;
 import com.wangy.webmvc.data.bean.Spittle;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
  * @author wangy
@@ -20,16 +19,15 @@ import static org.junit.jupiter.api.Assertions.assertNull;
  * @date 2020/3/26 / 00:19
  */
 @SpringBootTest
-@ActiveProfiles("dev0")
-@Transactional("hibernateTransactionManager")
-public class SpittleRepositoryTest {
+@ActiveProfiles("embed")
+@Transactional
+public class SpittleRepositoryTest extends WebmvcApplicationTests {
 
     @Autowired
-    @Qualifier("hibernateSpittleRepo")
     private SpittleRepository spittleRepository;
 
     @Test
-    public void testGetSpittles(){
+    public void testGetSpittles() {
         List<Spittle> spittles = spittleRepository.getSpittles(2, 1);
         assertEquals(1, spittles.size());
         assertEquals("da wan kuan mian", spittles.get(0).getMessage());
@@ -84,7 +82,7 @@ public class SpittleRepositoryTest {
     }
 
     @Test
-    public void testDelete(){
+    public void testDelete() {
         spittleRepository.delete(6);
         assertEquals(9, spittleRepository.count());
     }

@@ -1,5 +1,6 @@
 package com.wangy.webmvc.data.jpa;
 
+import com.wangy.webmvc.config.condition.PersistenceType;
 import com.wangy.webmvc.data.SpitterRepository;
 import com.wangy.webmvc.data.bean.Spitter;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import java.util.List;
  */
 @Repository
 @Qualifier("jpaSpitterRepository")
+@PersistenceType("jpa")
 @Slf4j
 public class JpaSpitterRepository implements SpitterRepository {
 
