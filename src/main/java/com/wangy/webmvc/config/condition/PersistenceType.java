@@ -18,5 +18,5 @@ import java.lang.annotation.*;
 @Conditional(PersistenceTypeCondition.class)
 public @interface PersistenceType {
 
-    String value() default "jdbc";
+    String value();
 }

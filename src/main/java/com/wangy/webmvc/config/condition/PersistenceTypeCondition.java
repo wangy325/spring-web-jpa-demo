@@ -19,7 +19,11 @@ public class PersistenceTypeCondition implements Condition {
         if (attrs != null && !attrs.isEmpty()) {
             persistenceType = (String) attrs.get("value");
         }
-        String property = System.getProperty("persistenceType","jdbc");
+        // 1. 获取系统参数；一般使用 java -jar -persistenceType=jpa 来配置
+//        String property = System.getProperty("persistenceType");
+
+        // 2. 获取spring环境配置，可以读取系统参数和上下文参数，以及配置文件参数
+        String property = context.getEnvironment().getProperty("spring.persistenceType");
         return persistenceType != null && persistenceType.equals(property);
     }
 }

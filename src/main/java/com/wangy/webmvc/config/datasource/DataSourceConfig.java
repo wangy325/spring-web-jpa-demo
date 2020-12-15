@@ -1,8 +1,9 @@
 package com.wangy.webmvc.config.datasource;
 
+import com.wangy.webmvc.config.RootConfig;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -21,22 +22,8 @@ import javax.sql.DataSource;
 @PropertySource("classpath:application.properties")
 public class DataSourceConfig {
 
-    @Value("${embed.driver}")
-    private String h2Driver;
-    @Value("${embed.url}")
-    private String h2Url;
-    @Value("${mysql.driver}")
-    private String mysqlDriver;
-    @Value("${mysql.url}")
-    private String mysqlUrl;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
-    @Value("${spring.datasource.schema}")
-    private String h2Schema;
-    @Value("${spring.datasource.data}")
-    private String h2Data;
+    @Autowired
+    RootConfig rootConfig;
 
 
     @Bean
@@ -47,8 +34,8 @@ public class DataSourceConfig {
         //(springboot)脚本可自动配置，无需指定
         return new EmbeddedDatabaseBuilder()
             .setType(EmbeddedDatabaseType.H2)
-            .addScript(h2Schema)
-            .addScript(h2Data)
+            .addScript(rootConfig.h2Schema)
+            .addScript(rootConfig.h2Data)
             .build();
     }
 
@@ -59,10 +46,10 @@ public class DataSourceConfig {
         // 以下配置使用hikari连接池接入h2内存数据库
         // TODO 脚本自动配置运行 ？
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(h2Url);
-        hikariConfig.setDriverClassName(h2Driver);
-        hikariConfig.setUsername(username);
-        hikariConfig.setPassword(password);
+        hikariConfig.setJdbcUrl(rootConfig.h2Url);
+        hikariConfig.setDriverClassName(rootConfig.h2Driver);
+        hikariConfig.setUsername(rootConfig.username);
+        hikariConfig.setPassword(rootConfig.password);
         hikariConfig.setMaximumPoolSize(10);
         hikariConfig.setConnectionTimeout(3000);
         hikariConfig.setMinimumIdle(2);
@@ -74,10 +61,10 @@ public class DataSourceConfig {
     public DataSource hikariMysql() {
         // 简单的hikari数据库连接池配置
         HikariConfig hikariConfig = new HikariConfig();
-        hikariConfig.setJdbcUrl(mysqlUrl);
-        hikariConfig.setDriverClassName(mysqlDriver);
-        hikariConfig.setUsername(username);
-        hikariConfig.setPassword(password);
+        hikariConfig.setJdbcUrl(rootConfig.mysqlUrl);
+        hikariConfig.setDriverClassName(rootConfig.mysqlDriver);
+        hikariConfig.setUsername(rootConfig.username);
+        hikariConfig.setPassword(rootConfig.password);
         return new HikariDataSource(hikariConfig);
     }
 }

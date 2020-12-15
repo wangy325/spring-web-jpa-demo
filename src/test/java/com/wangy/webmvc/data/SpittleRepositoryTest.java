@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ContextConfiguration(classes = RootConfig.class)
 @ActiveProfiles("h2")
 @Transactional(rollbackFor = Exception.class)
-public class SpittleRepositoryTest extends RepositoryTestConfig {
+public class SpittleRepositoryTest {
 
     @Autowired
     private SpittleRepository spittleRepository;

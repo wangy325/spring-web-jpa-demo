@@ -1,5 +1,6 @@
 package com.wangy.webmvc;
 
+@Deprecated
 public abstract class RepositoryTestConfig {
 
     // this construction block set program argument "persistenceType",
@@ -9,6 +10,10 @@ public abstract class RepositoryTestConfig {
     // to use by @conditional injection.
 
     {
+        /**
+         * use context properties to set persistenceType,
+         * this method useless now.
+         */
         System.setProperty("persistenceType", "jpa");
     }
 
