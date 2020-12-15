@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import java.util.List;
 @Repository
 @Qualifier("hibernateSpittleRepo")
 @PersistenceType("hibernate")
+@Transactional
 @SuppressWarnings("all")
 public class HibernateSpittleRepository implements SpittleRepository {
 

@@ -21,10 +21,6 @@ import java.util.Map;
 @PropertySource("classpath:application.properties")
 public class RootConfig extends AnnotationConfigApplicationContext {
 
-    {
-        System.out.println("load RootConfig");
-    }
-
     @Value("${embed.driver}")
     public String h2Driver;
     @Value("${embed.url}")
@@ -45,5 +41,9 @@ public class RootConfig extends AnnotationConfigApplicationContext {
     public String[] activeProfiles;
     @Value("${spring.persistenceType}")
     public String persistenceType;
+    @Value("${hibernate.properties}")
+    public String hibernateProperties;
+    @Value("${entity.package}")
+    public String entityPackage;
 
 }

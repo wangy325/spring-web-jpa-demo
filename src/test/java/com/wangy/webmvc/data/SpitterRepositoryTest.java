@@ -1,6 +1,5 @@
 package com.wangy.webmvc.data;
 
-import com.wangy.webmvc.RepositoryTestConfig;
 import com.wangy.webmvc.config.RootConfig;
 import com.wangy.webmvc.data.bean.Spitter;
 import org.junit.Before;
@@ -18,7 +17,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /**
- * 测试的时候使用{@link ActiveProfiles}注解激活profile
+ * 测试的时候使用{@link ActiveProfiles}注解激活profile，使用<a href="application.properties">配置文件</a>
+ * 中配置的持久化方案进行数据库访问
  *
  * @author wangy
  * @version 1.0

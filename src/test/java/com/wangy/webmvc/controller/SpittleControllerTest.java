@@ -4,6 +4,7 @@ import com.wangy.webmvc.data.SpittleRepository;
 import com.wangy.webmvc.data.bean.Spittle;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.web.servlet.view.InternalResourceView;
 
 import java.util.ArrayList;
@@ -34,10 +35,12 @@ public class SpittleControllerTest {
         when(mockRepository.getSpittles(Long.MAX_VALUE, 20)).thenReturn(expectSpittles);
         SpittleController spittleController = new SpittleController(mockRepository);
         //使用MocMvc测试不必启动mvc容器
-        MockMvc mockMvc = standaloneSetup(spittleController).setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp")).build();
+        MockMvc mockMvc = standaloneSetup(spittleController)
+            .setSingleView(new InternalResourceView("/WEB-INF/views/spittles.jsp"))
+            .build();
 //        mockMvc.perform(get("/spittles/page"))
-        mockMvc.perform(get("/spittles"))
-            .andExpect(view().name("spittles"))
+        ResultActions resultActions = mockMvc.perform(get("/spittles"));
+        resultActions.andExpect(view().name("spittles"))
             .andExpect(model().attributeExists("spittleList"))
             .andExpect(model().attribute("spittleList", hasItems(expectSpittles.toArray())));
     }

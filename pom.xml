@@ -27,10 +27,8 @@
         <junit.version>4.12</junit.version>
     </properties>
 
-
     <dependencies>
         <!--   spring    -->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
@@ -67,6 +65,12 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>3.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
         <!-- hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -80,7 +84,7 @@
         </dependency>
 
         <!-- ? -->
-        <dependency>
+        <!--<dependency>
             <groupId>jakarta.activation</groupId>
             <artifactId>jakarta.activation-api</artifactId>
             <version>1.2.2</version>
@@ -104,7 +108,7 @@
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
             <version>2.0.2</version>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -231,6 +235,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

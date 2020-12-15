@@ -25,7 +25,7 @@ public class WebConfig implements WebMvcConfigurer {
     /**
      * 配置JSP视图解析器
      *
-     * @return
+     * @return ViewResolver
      */
     @Bean
     public ViewResolver viewResolver() {

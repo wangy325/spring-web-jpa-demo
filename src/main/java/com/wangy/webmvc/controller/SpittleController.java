@@ -45,7 +45,10 @@ public class SpittleController {
      */
     @RequestMapping(method = RequestMethod.GET)
     public String spittles(Model model) {
-        model.addAttribute(spittleRepository.getSpittles(1L, 20));
+        // model会根据值的类型推断model的key值，如此例中的List<Spittle>
+        // 的key推断为spittleList
+        // 当然可以手动设置key，这是最不会引起歧义的方法
+        model.addAttribute(spittleRepository.getSpittles(Long.MAX_VALUE, 20));
         return "spittles";
     }
 
