@@ -12,9 +12,9 @@
         <title>Spittle</title>
 </head>
 <body>
-<h1>Recent Spittle></h1>
-<c:out value="Spittle.message"/><br>
-<c:out value="Spittle.date"/>
+<h1>Recent Spittle</h1>
+<c:out value="${spittle.message}"/><br>
+<c:out value="${spittle.time}"/>
 
 </body>
 </html>

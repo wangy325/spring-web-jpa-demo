@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: wangy325
@@ -16,12 +17,12 @@
         Register Form
 </h1>
 
-<form method="post">
+<form method="POST">
         First Name: <input id="firstName" type="text" name="firstName"/><br>
-        Last Name: <input id="LastName" type="text" name="lastName"/><br>
-        Username: <input id="userName" type="text" name="userName"/><br>
+        Last Name: <input id="lastName" type="text" name="lastName"/><br>
+        User Name: <input id="userName" type="text" name="username"/><br>
         Password: <input id="password" type="password" name="password"/><br>
-        <input id="submit" type="button" value="register">
+        <input type="submit" value="Register">
 </form>
 </body>
 </html>

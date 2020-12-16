@@ -15,18 +15,18 @@
 <h1>Recent Spittles</h1>
 <c:forEach items="${spittleList}" var="spittle">
         <li id="spittle_c<c:out value="${spittle.id}"/>">
-                <p class="spittleMessage">
+                <div class="spittleMessage">
                         <c:out value="${spittle.message}"/>
-                </p>
-                <p style="font-size: small">
+                </div>
+                <div style="font-size: small">
                         <span class="spittleTime">
                                 <c:out value="${spittle.time}"/>
                         </span>
-                        <span class="spittleLoccate">
+                        <span class="spittleLocate">
                                 (<c:out value="${spittle.latitude}"/>,
                                 <c:out value="${spittle.longitude}"/>)
                         </span>
-                </p>
+                </div>
         </li>
 </c:forEach>
 
