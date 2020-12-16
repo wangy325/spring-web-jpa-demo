@@ -45,5 +45,9 @@ public class RootConfig extends AnnotationConfigApplicationContext {
     public String hibernateProperties;
     @Value("${entity.package}")
     public String entityPackage;
+    @Value("${hibernate.JpaVendorAdapter.h2.dialect}")
+    public String jpaH2Dialect;
+    @Value("${hibernate.JpaVendorAdapter.mysql.dialect}")
+    public String jpaMysqlDialect;
 
 }

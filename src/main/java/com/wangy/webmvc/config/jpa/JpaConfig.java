@@ -1,5 +1,6 @@
 package com.wangy.webmvc.config.jpa;
 
+import com.wangy.webmvc.config.RootConfig;
 import com.wangy.webmvc.config.condition.JpaDatabaseType;
 import com.wangy.webmvc.config.condition.PersistenceType;
 import org.springframework.context.annotation.Bean;
@@ -26,10 +27,12 @@ import static org.springframework.orm.jpa.vendor.Database.MYSQL;
 @PersistenceType("jpa")
 public class JpaConfig {
 
-    private final DataSource dataSource;
+    private DataSource dataSource;
+    private RootConfig rootConfig;
 
-    public JpaConfig(DataSource dataSource) {
+    public JpaConfig(DataSource dataSource, RootConfig rootConfig) {
         this.dataSource = dataSource;
+        this.rootConfig = rootConfig;
     }
 
     /**
@@ -44,7 +47,7 @@ public class JpaConfig {
         hibernateJpaVendorAdapter.setDatabase(H2);
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(false);
-        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.H2Dialect");
+        hibernateJpaVendorAdapter.setDatabasePlatform(rootConfig.jpaH2Dialect);
         return hibernateJpaVendorAdapter;
     }
 
@@ -55,7 +58,7 @@ public class JpaConfig {
         hibernateJpaVendorAdapter.setDatabase(MYSQL);
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(false);
-        hibernateJpaVendorAdapter.setDatabasePlatform("org.hibernate.dialect.MySQL5Dialect");
+        hibernateJpaVendorAdapter.setDatabasePlatform(rootConfig.jpaMysqlDialect);
         return hibernateJpaVendorAdapter;
     }
 
@@ -70,7 +73,7 @@ public class JpaConfig {
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         // mapper scan
-        entityManagerFactoryBean.setPackagesToScan("com.wangy.webmvc.data.bean");
+        entityManagerFactoryBean.setPackagesToScan(rootConfig.entityPackage);
         return entityManagerFactoryBean;
     }
 
