@@ -1,10 +1,11 @@
 package com.wangy.webmvc.config.hibernate;
 
-import com.wangy.webmvc.config.RootConfig;
 import com.wangy.webmvc.config.condition.PersistenceType;
+import com.wangy.webmvc.config.properties.PropertiesConfig;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -31,7 +32,7 @@ import java.util.Properties;
 public class HibernateConfig {
 
     @Autowired
-    public RootConfig rootConfig;
+    public PropertiesConfig propertiesConfig;
     @Autowired
     private DataSource dataSource;
 
@@ -42,10 +43,10 @@ public class HibernateConfig {
         LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
         localSessionFactoryBean.setDataSource(dataSource);
         // 必须使用基于注解配置的Hibernate元数据
-        localSessionFactoryBean.setPackagesToScan(rootConfig.entityPackage);
+        localSessionFactoryBean.setPackagesToScan(propertiesConfig.entityPackage);
         try {
             // many ways to load a property file
-            InputStream inputStream = new ClassPathResource(rootConfig.hibernateProperties).getInputStream();
+            InputStream inputStream = new ClassPathResource(propertiesConfig.hibernateProperties).getInputStream();
             Properties properties = new Properties();
             properties.load(inputStream);
             localSessionFactoryBean.setHibernateProperties(properties);

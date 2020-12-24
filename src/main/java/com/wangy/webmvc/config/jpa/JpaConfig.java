@@ -1,8 +1,8 @@
 package com.wangy.webmvc.config.jpa;
 
-import com.wangy.webmvc.config.RootConfig;
 import com.wangy.webmvc.config.condition.JpaDatabaseType;
 import com.wangy.webmvc.config.condition.PersistenceType;
+import com.wangy.webmvc.config.properties.PropertiesConfig;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -28,11 +28,11 @@ import static org.springframework.orm.jpa.vendor.Database.MYSQL;
 public class JpaConfig {
 
     private DataSource dataSource;
-    private RootConfig rootConfig;
+    private PropertiesConfig propertiesConfig;
 
-    public JpaConfig(DataSource dataSource, RootConfig rootConfig) {
+    public JpaConfig(DataSource dataSource, PropertiesConfig propertiesConfig) {
         this.dataSource = dataSource;
-        this.rootConfig = rootConfig;
+        this.propertiesConfig = propertiesConfig;
     }
 
     /**
@@ -47,7 +47,7 @@ public class JpaConfig {
         hibernateJpaVendorAdapter.setDatabase(H2);
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(false);
-        hibernateJpaVendorAdapter.setDatabasePlatform(rootConfig.jpaH2Dialect);
+        hibernateJpaVendorAdapter.setDatabasePlatform(propertiesConfig.jpaH2Dialect);
         return hibernateJpaVendorAdapter;
     }
 
@@ -58,7 +58,7 @@ public class JpaConfig {
         hibernateJpaVendorAdapter.setDatabase(MYSQL);
         hibernateJpaVendorAdapter.setShowSql(true);
         hibernateJpaVendorAdapter.setGenerateDdl(false);
-        hibernateJpaVendorAdapter.setDatabasePlatform(rootConfig.jpaMysqlDialect);
+        hibernateJpaVendorAdapter.setDatabasePlatform(propertiesConfig.jpaMysqlDialect);
         return hibernateJpaVendorAdapter;
     }
 
@@ -73,7 +73,7 @@ public class JpaConfig {
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         // mapper scan
-        entityManagerFactoryBean.setPackagesToScan(rootConfig.entityPackage);
+        entityManagerFactoryBean.setPackagesToScan(propertiesConfig.entityPackage);
         return entityManagerFactoryBean;
     }
 
