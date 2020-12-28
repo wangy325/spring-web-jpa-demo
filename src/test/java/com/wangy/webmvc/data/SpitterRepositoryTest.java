@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +16,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 /**
- * 测试的时候使用{@link ActiveProfiles}注解激活profile，使用<a href="application.properties">配置文件</a>
- * 中配置的持久化方案进行数据库访问
+ * 测试的时候使用{@link ActiveProfiles}注解激活profile，
+ * 使用{@link TestPropertySource}来配置持久化方案
  *
  * @author wangy
  * @version 1.0
@@ -27,6 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = RootConfig.class)
 @ActiveProfiles("h2")
+@TestPropertySource(properties = {"persistenceType=jdbc"})
 @Transactional
 public class SpitterRepositoryTest {
 
@@ -106,3 +107,6 @@ public class SpitterRepositoryTest {
         SPITTERS[5] = new Spitter(4, "andrew", "wiggins", "aw22", "pass");
     }
 }
+
+
+

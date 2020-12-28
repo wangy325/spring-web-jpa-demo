@@ -4,9 +4,7 @@ spring:
       password: 123456
       schema: schema/schema.sql
       data: schema/data.sql
-  profiles:
-    active: h2
-  persistenceType: jdbc
+#  persistenceType: jdbc
 
 mysql:
   driver: com.mysql.cj.jdbc.Driver
@@ -17,7 +15,12 @@ embed:
   driver: org.h2.Driver
 
 hibernate:
+#  do not use any properties file in the future
   properties: hibernate/hibernate.properties
+#  show_sql: true
+#  format_sql: false
+#  cache:
+#    use_second_level_cache: false
   JpaVendorAdapter:
     h2:
       dialect: org.hibernate.dialect.H2Dialect

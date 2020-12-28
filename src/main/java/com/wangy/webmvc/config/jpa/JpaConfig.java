@@ -12,6 +12,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 import static org.springframework.orm.jpa.vendor.Database.H2;
@@ -65,9 +66,10 @@ public class JpaConfig {
     /**
      * 使用spring支持的jpa EntityManager配置，可以完全摆脱persistence.xml
      *
-     * @return {@link javax.persistence.EntityManager}
+     * @return {@link EntityManager}
      */
     @Bean
+    @SuppressWarnings("all")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(JpaVendorAdapter jpaVendorAdapter) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);

@@ -27,10 +27,6 @@ public class PropertiesConfig {
     public String h2Schema;
     @Value("${spring.datasource.data}")
     public String h2Data;
-    @Value("${spring.profiles.active}")
-    public String[] activeProfiles;
-    @Value("${spring.persistenceType}")
-    public String persistenceType;
     @Value("${hibernate.properties}")
     public String hibernateProperties;
     @Value("${hibernate.entity.package}")

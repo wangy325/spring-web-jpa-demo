@@ -5,7 +5,6 @@ import com.wangy.webmvc.config.properties.PropertiesConfig;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -46,7 +45,8 @@ public class HibernateConfig {
         localSessionFactoryBean.setPackagesToScan(propertiesConfig.entityPackage);
         try {
             // many ways to load a property file
-            InputStream inputStream = new ClassPathResource(propertiesConfig.hibernateProperties).getInputStream();
+            InputStream inputStream = new ClassPathResource(propertiesConfig.hibernateProperties)
+                .getInputStream();
             Properties properties = new Properties();
             properties.load(inputStream);
             localSessionFactoryBean.setHibernateProperties(properties);
