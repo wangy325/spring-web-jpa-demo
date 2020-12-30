@@ -1,9 +1,8 @@
-package com.wangy.webmvc.data;
+package com.wangy.webmvc.service;
 
-import com.wangy.webmvc.RepositoryTestConfig;
 import com.wangy.webmvc.config.RootConfig;
 
-import com.wangy.webmvc.data.bean.Spittle;
+import com.wangy.webmvc.entity.Spittle;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

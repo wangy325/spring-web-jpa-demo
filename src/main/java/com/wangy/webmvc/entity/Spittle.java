@@ -1,5 +1,7 @@
-package com.wangy.webmvc.data.bean;
+package com.wangy.webmvc.entity;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,17 +32,29 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode(exclude = {"id", "time"})
 @Entity(name = "spittle")
+@ApiModel("博文实体类")
 public class Spittle {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty("博文id")
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "spitterId")
+    @ApiModelProperty(hidden = true)
     private Spitter spitter;
+
+    @Column(name = "message")
     private String message;
+
+    @Column(name = "time")
     private Date time;
+
+    @Column(name = "latitude")
     private Double latitude;
+
+    @Column(name="longitude")
     private Double longitude;
 
     public Spittle() {

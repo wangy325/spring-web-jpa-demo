@@ -1,8 +1,8 @@
-package com.wangy.webmvc.data.jpa;
+package com.wangy.webmvc.service.jpa;
 
 import com.wangy.webmvc.config.condition.PersistenceType;
-import com.wangy.webmvc.data.SpittleRepository;
-import com.wangy.webmvc.data.bean.Spittle;
+import com.wangy.webmvc.service.SpittleRepository;
+import com.wangy.webmvc.entity.Spittle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.wangy.webmvc.controller;
 
-import com.wangy.webmvc.data.SpittleRepository;
-import com.wangy.webmvc.data.bean.Spittle;
+import com.wangy.webmvc.service.SpittleRepository;
+import com.wangy.webmvc.entity.Spittle;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;

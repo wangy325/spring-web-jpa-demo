@@ -1,8 +1,8 @@
 package com.wangy.webmvc.controller;
 
-import com.wangy.webmvc.data.SpittleRepository;
+import com.wangy.webmvc.service.SpittleRepository;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.Conventions;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +22,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/spittles")
+@SuppressWarnings("all")
+@Api("博文控制器")
 public class SpittleController {
 
     private static final String MAX_LONG_AS_STRING = Long.MAX_VALUE + "";

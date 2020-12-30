@@ -24,10 +24,11 @@ The following guides illustrate how to use some features concretely:
 - 多数据源（H2/MySQL），多持久层（spring-jdbc/jpa-hibernate/hibernate）的配置
     - 使用@Profile，声明profile，以及激活profile的多种方式
         - 在测试类中使用@ActiveProfile激活配置
-        - 在IDE或者命令行中（java -jar -spring.profile-active=xx）配置系统参数（System Property）
+        - 在IDE或者命令行中（java -jar -Dspring.profiles.active=xx）配置系统参数（System Property）
         - 配置web应用的上下文参数
     - 使用@Conditional条件化加载Bean
-- 使用Hakari数据库连接池（SpringBoot默认的连接池）
+        同样地，需要在运行jar时指定系统参数（*systemProperties*）： java -jar -DpersistenceType=[jdbc,jpa,hibernate]任一种即可
+- 使用Hakari数据库连接池进行简单的数据库配置（SpringBoot默认的连接池）
 - hibernate/jpa的数据实体（Entity）的配置相关注解
     - `@Entity`
     - `@Id`

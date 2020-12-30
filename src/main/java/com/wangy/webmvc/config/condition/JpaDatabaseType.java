@@ -10,7 +10,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * use this condition to configure {@link JpaVendorAdapter}'s database type and other info.
+ * use this condition to configure {@link JpaVendorAdapter}'s database type and other persistence info.
  *
  * @author wangy325
  */

@@ -27,4 +27,4 @@ hibernate:
     mysql:
       dialect: org.hibernate.dialect.MySQL5Dialect
   entity:
-    package: com.wangy.webmvc.data.bean
+    package: com.wangy.webmvc.entity

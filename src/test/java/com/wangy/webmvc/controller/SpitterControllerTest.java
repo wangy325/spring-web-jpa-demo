@@ -1,7 +1,7 @@
 package com.wangy.webmvc.controller;
 
-import com.wangy.webmvc.data.SpitterRepository;
-import com.wangy.webmvc.data.bean.Spitter;
+import com.wangy.webmvc.service.SpitterRepository;
+import com.wangy.webmvc.entity.Spitter;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 

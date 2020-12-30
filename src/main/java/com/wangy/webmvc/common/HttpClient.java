@@ -1,4 +1,4 @@
-package com.wangy.webmvc.util;
+package com.wangy.webmvc.common;
 
 /**
  * @author wangy

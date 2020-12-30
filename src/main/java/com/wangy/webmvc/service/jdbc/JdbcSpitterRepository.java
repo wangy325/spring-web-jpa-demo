@@ -1,9 +1,9 @@
-package com.wangy.webmvc.data.jdbc;
+package com.wangy.webmvc.service.jdbc;
 
 import com.wangy.webmvc.config.condition.PersistenceType;
 import com.wangy.webmvc.config.jdbc.JdbcConfig;
-import com.wangy.webmvc.data.SpitterRepository;
-import com.wangy.webmvc.data.bean.Spitter;
+import com.wangy.webmvc.service.SpitterRepository;
+import com.wangy.webmvc.entity.Spitter;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;

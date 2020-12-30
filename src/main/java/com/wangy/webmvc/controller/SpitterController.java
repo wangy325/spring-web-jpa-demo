@@ -1,10 +1,11 @@
 package com.wangy.webmvc.controller;
 
-import com.wangy.webmvc.data.SpitterRepository;
-import com.wangy.webmvc.data.bean.Spitter;
+import com.wangy.webmvc.service.SpitterRepository;
+import com.wangy.webmvc.entity.Spitter;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +23,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
  */
 @Controller
 @RequestMapping("/spitter")
+@SuppressWarnings("all")
+@Api("用户控制器")
 public class SpitterController {
 
     private SpitterRepository spitterRepository;

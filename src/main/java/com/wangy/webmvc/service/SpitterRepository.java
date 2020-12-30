@@ -1,6 +1,6 @@
-package com.wangy.webmvc.data;
+package com.wangy.webmvc.service;
 
-import com.wangy.webmvc.data.bean.Spitter;
+import com.wangy.webmvc.entity.Spitter;
 
 import java.util.List;
 

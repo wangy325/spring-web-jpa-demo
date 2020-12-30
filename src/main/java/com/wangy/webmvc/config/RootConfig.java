@@ -3,10 +3,6 @@ package com.wangy.webmvc.config;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
-import org.springframework.core.env.Environment;
-import org.springframework.core.env.MutablePropertySources;
-import org.springframework.core.env.PropertiesPropertySource;
-import org.springframework.core.env.PropertySources;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -43,20 +39,4 @@ public class RootConfig extends AnnotationConfigApplicationContext {
         yamlPropertyPlaceholder.setFileEncoding("UTF-8");
         return yamlPropertyPlaceholder;
     }
-
-
-   /* @Bean
-    public PropertiesPropertySource propertySource(YamlPropertiesFactoryBean yamlPropertiesFactoryBean) {
-        PropertiesPropertySource propertySource = new PropertiesPropertySource("ymlSource",
-            Objects.requireNonNull(yamlPropertiesFactoryBean.getObject()));
-        return propertySource;
-    }
-
-    @Bean
-    public PropertySources propertySources
-        (PropertiesPropertySource propertySource) {
-        MutablePropertySources mutablePropertySources = new MutablePropertySources();
-        mutablePropertySources.addLast(propertySource);
-        return mutablePropertySources;
-    }*/
 }

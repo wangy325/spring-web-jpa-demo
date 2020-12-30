@@ -1,7 +1,7 @@
-package com.wangy.webmvc.data;
+package com.wangy.webmvc.service;
 
 import com.wangy.webmvc.config.RootConfig;
-import com.wangy.webmvc.data.bean.Spitter;
+import com.wangy.webmvc.entity.Spitter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = RootConfig.class)
 @ActiveProfiles("h2")
-@TestPropertySource(properties = {"persistenceType=jdbc"})
+@TestPropertySource(properties = {"persistenceType=jpa"})
 @Transactional
 public class SpitterRepositoryTest {
 

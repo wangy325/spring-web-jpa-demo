@@ -1,8 +1,8 @@
-package com.wangy.webmvc.data.hibernate;
+package com.wangy.webmvc.service.hibernate;
 
 import com.wangy.webmvc.config.condition.PersistenceType;
-import com.wangy.webmvc.data.SpitterRepository;
-import com.wangy.webmvc.data.bean.Spitter;
+import com.wangy.webmvc.service.SpitterRepository;
+import com.wangy.webmvc.entity.Spitter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;

@@ -1,14 +1,13 @@
-package com.wangy.webmvc.data.hibernate;
+package com.wangy.webmvc.service.hibernate;
 
 import com.wangy.webmvc.config.condition.PersistenceType;
-import com.wangy.webmvc.data.SpittleRepository;
-import com.wangy.webmvc.data.bean.Spitter;
-import com.wangy.webmvc.data.bean.Spittle;
+import com.wangy.webmvc.service.SpittleRepository;
+import com.wangy.webmvc.entity.Spitter;
+import com.wangy.webmvc.entity.Spittle;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.criteria.CriteriaBuilder;

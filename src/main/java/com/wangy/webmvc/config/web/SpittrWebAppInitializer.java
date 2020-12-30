@@ -1,6 +1,7 @@
 package com.wangy.webmvc.config.web;
 
 import com.wangy.webmvc.config.RootConfig;
+import com.wangy.webmvc.config.swagger.SwaggerConfig;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.ServletContext;
@@ -38,7 +39,7 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class<?>[]{WebConfig.class};
+        return new Class<?>[]{WebConfig.class, SwaggerConfig.class};
     }
 
     /**
