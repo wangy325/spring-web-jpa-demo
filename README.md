@@ -44,3 +44,4 @@ The following guides illustrate how to use some features concretely:
 - jsp （java server page）
 - 使用MockMvc测试控制器（只测试了控制层的逻辑，和数据层（是否正确注入）无关）
 - `javax.validation`进行表单（请求入参）简单校验
+- 整合swagger-ui
