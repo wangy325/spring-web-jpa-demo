@@ -39,6 +39,9 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
      */
     @Override
     protected Class<?>[] getServletConfigClasses() {
+        // 需要将Swagger配置类加入Servlet配置中
+        // 以避免Swagger 控制器请求错误：
+        // https://stackoverflow.com/questions/59387582/swagger-2-6-1-swagger-resources-configuration-ui-404
         return new Class<?>[]{WebConfig.class, SwaggerConfig.class};
     }
 
@@ -56,7 +59,6 @@ public class SpittrWebAppInitializer extends AbstractAnnotationConfigDispatcherS
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         super.onStartup(servletContext);
-
         // 配置额外的h2数据库控制台Servlet
         ServletRegistration.Dynamic H2Console =
             servletContext.addServlet("h2Console", "org.h2.server.web.WebServlet");

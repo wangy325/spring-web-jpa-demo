@@ -20,10 +20,10 @@ import java.util.Map;
  * @version 1.0
  * @date 2020/3/14 / 21:12
  */
+@Api(tags = {"博文控制器"})
 @Controller
 @RequestMapping("/spittles")
 @SuppressWarnings("all")
-@Api("博文控制器")
 public class SpittleController {
 
     private static final String MAX_LONG_AS_STRING = Long.MAX_VALUE + "";

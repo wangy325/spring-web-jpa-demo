@@ -2,7 +2,6 @@ package com.wangy.webmvc.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -45,8 +44,8 @@ public class SwaggerConfig {
      */
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("spring mvc swagger api test")
-            .description("spring整合swagger2")
+            .title("Spitter Application API")
+            .description("《spring in action》学习项目API文档")
             .termsOfServiceUrl("http://localhost:8080/swagger-ui.html")
             .version("1.0")
             .build();
