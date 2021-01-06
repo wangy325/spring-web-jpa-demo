@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import springfox.documentation.annotations.ApiIgnore;
@@ -46,6 +45,16 @@ public class SpitterController {
         return "registerForm";
     }
 
+    /**
+     * here is a issue about hidden params do not need:
+     * <a href="https://github.com/springfox/springfox/issues/1438">
+     * https://github.com/springfox/springfox/issues/1438
+     * </a>
+     *
+     * @param spitterDTO
+     * @param errors
+     * @return
+     */
     @ApiOperation("注册新用户")
     @RequestMapping(value = "/register", method = POST)
     public String register(@Valid SpitterDTO spitterDTO,
@@ -61,7 +70,7 @@ public class SpitterController {
 
     @ApiOperation(value = "获取指定用户信息", response = String.class)
     @RequestMapping(value = "/{username}", method = GET)
-    public String showProfile(@PathVariable @ApiParam(name = "用户名", required = true) String username,
+    public String showProfile(@PathVariable @ApiParam(value = "用户名", required = true) String username,
                               Model model) {
         model.addAttribute(spitterRepository.findByUsername(username));
         return "profile";

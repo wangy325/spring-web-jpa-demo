@@ -6,9 +6,16 @@ import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
+import springfox.documentation.service.ApiKey;
+import springfox.documentation.service.AuthorizationScope;
+import springfox.documentation.service.SecurityReference;
 import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author wangy
@@ -31,15 +38,49 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo())
+            .groupName("资源管理")
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.wangy.webmvc.controller"))
             .paths(PathSelectors.any())
-            .build();
+            .build()
+            .securitySchemes(securitySchemes())
+            .securityContexts(securityContexts())
+            ;
     }
+
+    /**
+     * 为swagger添加统一认证参数<br>
+     * https://www.jianshu.com/p/7a24d202b395
+     */
+    private List<ApiKey> securitySchemes() {
+        return new ArrayList<ApiKey>() {{
+            new ApiKey("Authorization", "Authorization", "header");
+        }};
+    }
+
+    private List<SecurityContext> securityContexts() {
+        return new ArrayList<SecurityContext>() {{
+            SecurityContext.builder()
+                .securityReferences(defaultAuth())
+                .forPaths(PathSelectors.regex("^(?!auth).*$"))
+                .build();
+        }};
+    }
+
+    List<SecurityReference> defaultAuth() {
+        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
+        authorizationScopes[0] = authorizationScope;
+        return new ArrayList<SecurityReference>() {{
+            new SecurityReference("Authorization", authorizationScopes);
+        }};
+    }
+
 
     /**
      * 创建该API的基本信息（这些基本信息会展现在文档页面中）
      * 默认访问地址：http://host:port/swagger-ui.html
+     *
      * @return ApiInfo
      */
     private ApiInfo apiInfo() {
