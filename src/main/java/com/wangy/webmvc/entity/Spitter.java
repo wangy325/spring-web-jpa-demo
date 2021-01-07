@@ -42,7 +42,6 @@ import java.util.Collection;
 
 @Data
 @Entity(name = "spitter")
-
 public class Spitter {
 
     @Id

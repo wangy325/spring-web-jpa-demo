@@ -38,7 +38,6 @@ public class SwaggerConfig {
     public Docket createRestApi() {
         return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo())
-            .groupName("资源管理")
             .select()
             .apis(RequestHandlerSelectors.basePackage("com.wangy.webmvc.controller"))
             .paths(PathSelectors.any())
@@ -54,16 +53,16 @@ public class SwaggerConfig {
      */
     private List<ApiKey> securitySchemes() {
         return new ArrayList<ApiKey>() {{
-            new ApiKey("Authorization", "Authorization", "header");
+            add(new ApiKey("Authorization", "Authorization", "header"));
         }};
     }
 
     private List<SecurityContext> securityContexts() {
         return new ArrayList<SecurityContext>() {{
-            SecurityContext.builder()
+            add(SecurityContext.builder()
                 .securityReferences(defaultAuth())
                 .forPaths(PathSelectors.regex("^(?!auth).*$"))
-                .build();
+                .build());
         }};
     }
 
@@ -72,7 +71,7 @@ public class SwaggerConfig {
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         return new ArrayList<SecurityReference>() {{
-            new SecurityReference("Authorization", authorizationScopes);
+            add(new SecurityReference("Authorization", authorizationScopes));
         }};
     }
 

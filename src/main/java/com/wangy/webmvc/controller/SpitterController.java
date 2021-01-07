@@ -2,10 +2,12 @@ package com.wangy.webmvc.controller;
 
 import com.wangy.webmvc.entity.Spitter;
 import com.wangy.webmvc.model.dto.SpitterDTO;
+import com.wangy.webmvc.model.vo.SpitterVO;
 import com.wangy.webmvc.service.SpitterRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
@@ -68,11 +71,18 @@ public class SpitterController {
         return "redirect:/spitter/" + spitter.getUsername();
     }
 
+    /**
+     * demo json response
+     * @param username
+     * @return
+     */
     @ApiOperation(value = "获取指定用户信息", response = String.class)
     @RequestMapping(value = "/{username}", method = GET)
-    public String showProfile(@PathVariable @ApiParam(value = "用户名", required = true) String username,
-                              Model model) {
-        model.addAttribute(spitterRepository.findByUsername(username));
-        return "profile";
+    @ResponseBody
+    public SpitterVO showProfile(@PathVariable @ApiParam(value = "用户名", required = true) String username) {
+        Spitter spitter = spitterRepository.findByUsername(username);
+        SpitterVO spitterVO = new SpitterVO();
+        BeanUtils.copyProperties(spitter, spitterVO);
+        return spitterVO;
     }
 }

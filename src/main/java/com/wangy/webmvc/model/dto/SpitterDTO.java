@@ -38,5 +38,4 @@ public class SpitterDTO {
     @Size(min = 4, max = 30)
     @ApiModelProperty(value = "密码", required = true)
     private String password;
-
 }
