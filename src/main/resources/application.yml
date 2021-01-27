@@ -28,3 +28,17 @@ hibernate:
       dialect: org.hibernate.dialect.MySQL5Dialect
   entity:
     package: com.wangy.webmvc.entity
+
+
+#  messages
+validationMessages:
+  firstName:
+    size: First name must be between {min} and {max} characters long.
+  lastName:
+    size: Last name must be between {min} and {max} characters long.
+  userName:
+    size: User name must be between {min} and {max} characters long.
+  password:
+    size: Password must be between {min} and {max} characters long.
+  email:
+    valid: The email address must be valid.

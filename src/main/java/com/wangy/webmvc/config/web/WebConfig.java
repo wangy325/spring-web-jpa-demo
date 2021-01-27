@@ -1,8 +1,10 @@
 package com.wangy.webmvc.config.web;
 
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
@@ -40,6 +42,13 @@ public class WebConfig implements WebMvcConfigurer {
         resolver.setExposeContextBeansAsAttributes(true);
         resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
         return resolver;
+    }
+
+    @Bean
+    public MessageSource messageSource(){
+        ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+        messageSource.setBasename("validationMessages");
+        return messageSource;
     }
 
     @Override

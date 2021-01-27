@@ -45,3 +45,11 @@ The following guides illustrate how to use some features concretely:
 - 使用MockMvc测试控制器（只测试了控制层的逻辑，和数据层（是否正确注入）无关）
 - `javax.validation`进行表单（请求入参）简单校验
 - 整合swagger-ui
+- 使用第三方swagger-ui [swagger-bootstrap-ui](https://github.com/xiaoymin/swagger-bootstrap-ui)
+    - 已经升级为[knife4j](https://doc.xiaominfo.com/knife4j/documentation/)
+
+TODO:
+- [ ] 使用spring消息
+- [ ] 统一异常处理
+- [ ] 升级日志框架h2
+- [ ] 处理jar包冲突
