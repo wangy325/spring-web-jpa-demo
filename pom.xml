@@ -13,7 +13,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring.version>5.2.4.RELEASE</spring.version>
-        <jackson.version>2.10.2</jackson.version>
+        <jackson.version>2.12.1</jackson.version>
         <h2.version>1.4.200</h2.version>
         <hikari.version>3.4.2</hikari.version>
         <mysql.version>8.0.19</mysql.version>
